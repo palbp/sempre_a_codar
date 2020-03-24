@@ -1,2 +1,2 @@
 # sempre_a_codar
-Projects developed wile streaming for "sempre a codar".
+Projects developed while streaming for "sempre a codar".
