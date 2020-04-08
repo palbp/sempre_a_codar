@@ -7,6 +7,9 @@ import androidx.annotation.MainThread
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
+/**
+ * The application's main activity.
+ */
 @MainThread
 class MainActivity : AppCompatActivity() {
 

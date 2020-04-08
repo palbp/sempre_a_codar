@@ -6,7 +6,7 @@ package palbp.sempreacodar.bouncingball.physics
  * @property    dx  the horizontal coordinate variation
  * @property    dy  the vertical coordinate variation
  */
-class Velocity(val dx: Float, val dy: Float) {
+data class Velocity(val dx: Float, val dy: Float) {
     companion object {
         /**
          * The velocity instance that corresponds to the Zero vector. It is used to
