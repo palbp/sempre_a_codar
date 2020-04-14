@@ -9,7 +9,8 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.annotation.MainThread
 import androidx.core.content.res.ResourcesCompat.getColor
-import palbp.sempreacodar.snake.physics.Location
+import palbp.sempreacodar.snake.physics.Vector2D
+
 
 /**
  * The game control pad.
@@ -17,7 +18,16 @@ import palbp.sempreacodar.snake.physics.Location
 @MainThread
 class ControlPad(ctx: Context, attrs: AttributeSet?) : View(ctx, attrs) {
 
-    private lateinit var interiorCenter: Location
+    interface ControlListener {
+        fun onChangeDirection(direction: Vector2D)
+    }
+
+    var listener: ControlListener? = null
+
+    private lateinit var smallCenter: Vector2D
+    private var smallRadius: Float = 0f
+    private lateinit var bigCenter: Vector2D
+    private var bigRadius: Float = 0f
 
     private val notPressedBrushes: Pair<Paint, Paint> = Pair(
         Paint().apply { color = getColor(resources, R.color.colorPadBackground, ctx.theme) },
@@ -45,7 +55,10 @@ class ControlPad(ctx: Context, attrs: AttributeSet?) : View(ctx, attrs) {
     @SuppressLint("DrawAllocation")
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         if (changed) {
-            interiorCenter = Location((right - left)/2f, (bottom - top)/2f)
+            smallCenter = Vector2D((right - left)/2f, (bottom - top)/2f)
+            smallRadius = width / 4f
+            bigRadius = width / 2f
+            bigCenter = Vector2D(width / 2f, height / 2f)
         }
     }
 
@@ -54,23 +67,35 @@ class ControlPad(ctx: Context, attrs: AttributeSet?) : View(ctx, attrs) {
      */
     override fun onDraw(canvas: Canvas) {
         val brushes = if (isPressed) pressedBrushes else notPressedBrushes
-        canvas.drawCircle(width / 2f, height / 2f, width / 2f, brushes.first)
-        canvas.drawCircle(interiorCenter.x, interiorCenter.y, width / 4f, brushes.second)
+        canvas.drawCircle(bigCenter.x, bigCenter.y, bigRadius, brushes.first)
+        canvas.drawCircle(smallCenter.x, smallCenter.y, smallRadius, brushes.second)
     }
 
     /**
      * Method called to handle touch events
      */
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        fun computeCenter(event: MotionEvent): Location {
-            return Location(event.x, event.y)
+        fun computeDistance(event: MotionEvent): Vector2D {
+            val distanceVector = Vector2D(event.x, event.y) - bigCenter
+            return if (distanceVector.magnitude() + smallRadius < bigRadius)
+                distanceVector
+            else
+                distanceVector.unit() * (bigRadius - smallRadius)
         }
-        interiorCenter = when (event.action) {
-            MotionEvent.ACTION_DOWN -> { isPressed = true; computeCenter(event) }
-            MotionEvent.ACTION_UP -> { isPressed = false; Location(width/2f, height/2f) }
-            else -> computeCenter(event)
+
+        fun computeSmallCenter(distance: Vector2D): Vector2D {
+            return Vector2D(bigCenter.x, bigCenter.y) + distance
+        }
+
+        var direction = computeDistance(event)
+        smallCenter = when (event.action) {
+            MotionEvent.ACTION_DOWN -> { isPressed = true; computeSmallCenter(direction) }
+            MotionEvent.ACTION_UP -> { isPressed = false; direction = Vector2D.NullVector; bigCenter }
+            else -> computeSmallCenter(direction)
         }
         invalidate()
+        listener?.onChangeDirection(direction)
+
         return true
     }
 }

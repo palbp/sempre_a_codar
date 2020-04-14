@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         arenaView.holder.addCallback(object : Callback {
             lateinit var engine: Engine
             override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
-                engine.start(holder, arenaView)
+                engine.start(holder, arenaView, controlPad)
             }
 
             override fun surfaceCreated(holder: SurfaceHolder) {

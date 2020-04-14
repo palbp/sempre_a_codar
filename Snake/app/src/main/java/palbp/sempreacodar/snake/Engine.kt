@@ -6,6 +6,7 @@ import androidx.annotation.AnyThread
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import palbp.sempreacodar.snake.physics.Location
+import palbp.sempreacodar.snake.physics.Vector2D
 import palbp.sempreacodar.snake.physics.Velocity
 
 /**
@@ -18,12 +19,13 @@ class Engine {
             arena.snake = Snake(
                 position = Location(arenaBounds.x/2, arenaBounds.y/2),
                 velocity = Velocity.Stopped,
-                headRadius = 60f,
+                headRadius = 30f,
                 bounds = arenaBounds)
         }
     }
 
     private fun doStep(holder: SurfaceHolder, arena: ArenaView) {
+        arena.snake?.velocity = snakeVelocity
         arena.snake?.move()
         draw(holder, arena)
     }
@@ -57,16 +59,29 @@ class Engine {
         @AnyThread get() = worker != null
 
     /**
+     * The current velocity of the snake
+     */
+    @Volatile
+    private var snakeVelocity: Velocity = Velocity.Stopped
+
+    /**
      * Starts the game engine
      *
      * @param   holder  The surface holder used to draw the game UI
      * @param   arena   The view that displays the game arena
+     * @param   pad     The gmae control pad
      */
     @MainThread
-    fun start(holder: SurfaceHolder, arena: ArenaView) {
+    fun start(holder: SurfaceHolder, arena: ArenaView, pad: ControlPad) {
 
         if (isStarted)
             return
+
+        pad.listener = object : ControlPad.ControlListener {
+            override fun onChangeDirection(direction: Vector2D) {
+                snakeVelocity = Velocity.of(direction * 0.3f)
+            }
+        }
 
         val bounds = Location(arena.width.toFloat(), arena.height.toFloat())
         worker = kotlin.concurrent.thread(name = "Engine thread") @WorkerThread {

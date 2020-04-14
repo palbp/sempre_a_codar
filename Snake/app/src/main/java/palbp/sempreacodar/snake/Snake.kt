@@ -30,7 +30,6 @@ class Snake(
      * Implementation note: the collision detection algorithm is overly simplified, to say the least
      */
     fun move(): Snake {
-        velocity = if (collisionDetected()) Velocity.Stopped else velocity
         position += velocity
         return this
     }
