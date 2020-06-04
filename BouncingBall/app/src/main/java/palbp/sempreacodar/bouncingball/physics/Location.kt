@@ -16,7 +16,8 @@ data class Location(val x: Float, val y: Float) {
     }
 
     /**
-     * Operator overload that produces the [Location] instance that results from moving the
+     * Operator overload that produces the [Location] instance that results from moving this
+     * location with the given velocity.
      */
     operator fun plus(velocity: Velocity) = Location(x + velocity.dx, y + velocity.dy)
 }
