@@ -21,7 +21,7 @@
         val y = 20
         val radius = aRadius 
       }
-      // ... oher stuff not relevant for the question
+      // ... other stuff not relevant for the question
     }
     ```
    1. What is the value of the expression `aBall.radius` ?
