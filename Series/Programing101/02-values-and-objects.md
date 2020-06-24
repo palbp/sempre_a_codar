@@ -36,7 +36,7 @@
         val position = aPosition
         val radius = 15 
       }
-      // ... oher stuff not relevant for the question
+      // ... other stuff not relevant for the question
     }
     ```
     1. Which of the following expressions evaluate to `5` ?
