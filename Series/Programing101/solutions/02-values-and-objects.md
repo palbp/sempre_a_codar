@@ -17,7 +17,8 @@
 
    2. Draw a diagram of the existing variables, values and objects (the program's state)
    
-      Answer: ![Answer](./images/02-solution-01.png "Answer")
+      Answer:   
+      ![Answer](./images/02-solution-01.png "Answer")
 
 2. Consider the next program:    
     ```kotlin
@@ -38,7 +39,8 @@
         * `aBall.position.x`
     2. Draw a diagram of the existing variables, values and objects (the program's state)
 
-        Answer: ![Answer](./images/02-solution-02.png "Answer")
+        Answer:   
+        ![Answer](./images/02-solution-02.png "Answer")
 
 3. Consider the following diagram of a program's state. Write the code that creates the depicted elements. 
 
