@@ -14,9 +14,9 @@ Initial requirements for following along:
   * What do we need to follow along?
   * What will be the outcome?
 
-* The programmer's universe - part 1:
+* The programmer's universe - part 1
   * [Values and objects](02-values-and-objects.md)
-  * Types and operations
+  * [Types and operations](03-types-and-operations.md)
   * Identity and equivalence
   * Mutability and immutability
 

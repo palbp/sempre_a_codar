@@ -13,11 +13,12 @@
       // ... oher stuff not relevant for the question
     }
     ```
-   1. What is the value of the expression `aBall.radius` ? Answer: `15`
+   1. What is the value of the expression `aBall.radius` ?    
+   __Answer:__ `15`
 
    2. Draw a diagram of the existing variables, values and objects (the program's state)
    
-      Answer:   
+      __Answer:__   
       ![Answer](./images/02-solution-01.png "Answer")
 
 2. Consider the next program:    
@@ -31,7 +32,7 @@
       // ... oher stuff not relevant for the question
     }
     ```
-    1. Which of the following expressions evaluate to `5` ? Answer (wrong answers are ~~strikethrough~~)
+    1. Which of the following expressions evaluate to `5` ? (wrong answers are ~~strikethrough~~)
         * ~~`aPosition`~~
         * `aPosition.x`
         * ~~`aBall`~~
@@ -39,14 +40,14 @@
         * `aBall.position.x`
     2. Draw a diagram of the existing variables, values and objects (the program's state)
 
-        Answer:   
+        __Answer:__   
         ![Answer](./images/02-solution-02.png "Answer")
 
 3. Consider the following diagram of a program's state. Write the code that creates the depicted elements. 
 
     ![Diagram](../images/02-diagram.png "Question 3 diagram")
 
-    Answer: 
+    __Answer:__     
 
     ```kotlin
     fun main() {
