@@ -19,7 +19,7 @@
    2. Draw a diagram of the existing variables, values and objects (the program's state)
    
       __Answer:__   
-      ![Answer](./images/02-solution-01.png "Answer")
+      ![Answer](./images/01-solution-01.png "Answer")
 
 2. Consider the next program:    
     ```kotlin
@@ -41,11 +41,11 @@
     2. Draw a diagram of the existing variables, values and objects (the program's state)
 
         __Answer:__   
-        ![Answer](./images/02-solution-02.png "Answer")
+        ![Answer](./images/01-solution-02.png "Answer")
 
 3. Consider the following diagram of a program's state. Write the code that creates the depicted elements. 
 
-    ![Diagram](../images/02-diagram.png "Question 3 diagram")
+    ![Diagram](../images/01-diagram.png "Question 3 diagram")
 
     __Answer:__     
 

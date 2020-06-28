@@ -1,6 +1,6 @@
 # Values and Objects 
 
-## Script / Outline (20 mins)
+## Script / Outline (35 mins) ([video](https://www.youtube.com/watch?v=Ma15TgSmySU&list=PL8XxoCaL3dBiJ_djQKKbbI4uN081F7Sgw))
 1. Variable declaration and initiation
 2. Values: Integer, Double, Char, String, Boolean
 3. Operations with values (e.g. arithmetic, logic)
@@ -11,7 +11,7 @@
    2. Composing data (values and objects)
 7. A mental model for data representation
 
-## Exercises (20 mins) ([solution](./solutions/02-values-and-objects.md))
+## Exercises (20 mins) ([solution](./solutions/01-values-and-objects.md))
 1. Consider the following program:
     ```kotlin
     fun main() {
@@ -49,4 +49,4 @@
 
 3. Consider the following diagram of a program's state. Write the code that creates the depicted elements. 
 
-    ![Diagram](./images/02-diagram.png "Question 3 diagram")
+    ![Diagram](./images/01-diagram.png "Question 3 diagram")

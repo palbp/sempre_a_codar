@@ -1,6 +1,6 @@
 # Introduction 
 
-## Script / Outline (15 mins)
+## Script / Outline (12 mins) ([video](https://www.youtube.com/watch?v=KYL_XR6eTOo))
 
 1. Identify the target audience
 2. State the requirements for following along

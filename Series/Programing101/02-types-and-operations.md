@@ -1,6 +1,6 @@
 # Values and Objects 
 
-## Script / Outline (15 mins)
+## Script / Outline (45 mins)([video](https://www.youtube.com/watch?v=jJjUX7meSag&list=PL8XxoCaL3dBiJ_djQKKbbI4uN081F7Sgw))
 1. Type system: introduction
    1. Its purpose, revisited
    2. Type inference
@@ -8,7 +8,7 @@
    4. Custom data types: data classes
 2. Demo: revisiting the [moving ball](https://gist.github.com/palbp/ad003b75b36d2d4f1b828bf695c81820)
 
-## Exercises (10 mins) ([solution](./solutions/03-types-and-operations.md))
+## Exercises (10 mins) ([solution](./solutions/02-types-and-operations.md))
 1. Which of the following instructions cause type verification errors?
    * `val aValue = "25"`
    * `val aValue: Int = "25"`
