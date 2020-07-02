@@ -17,7 +17,7 @@ Initial requirements for following along:
 * The programmer's universe - part 1
   * [Values and objects](01-values-and-objects.md)
   * [Types and operations](02-types-and-operations.md)
-  * Identity and equivalence
+  * [Identity and equivalence](03-identity-and-equivalence.md)
   * Mutability and immutability
   * Summary (the programmer's universe so far)
 
