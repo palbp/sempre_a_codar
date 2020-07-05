@@ -15,12 +15,13 @@
     }
     ```
    1. Draw a diagram of the existing variables, values and objects (the program's state)   
+
       __Answer:__   
       ![Answer](./images/03-solution-01.png "Answer")
 
    2. What is the value of each of the following expressions?   
       
-      **Answers:** 
+      __Answer:__ 
       * `aValue == aLocation.x` --> `true`
       * `aValue === aLocation.x` --> `true`
       * `aLocation.x != aLocation.y` --> `false`
