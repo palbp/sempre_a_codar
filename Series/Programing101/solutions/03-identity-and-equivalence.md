@@ -15,7 +15,8 @@
     }
     ```
    1. Draw a diagram of the existing variables, values and objects (the program's state)   
-      **Answer:** (coming soon)
+      __Answer:__   
+      ![Answer](./images/03-solution-01.png "Answer")
 
    2. What is the value of each of the following expressions?   
       
@@ -46,7 +47,7 @@
     ```    
     1. What is the value of each of the following expressions?   
         
-        **Answers:**
+        __Answer:__
          * `aBall.center == anotherBall.center` --> `true`
          * `aBall.center === anotherBall.center` --> `true`
          * `aBall.center == yetAnotherBall.center` --> `true`
@@ -55,6 +56,6 @@
 
     2. Consider the type definitions `Location` and `Ball` of the previous program. For two arbitrary `Ball` instances, referred by variables `ball1` and `ball2`, what is the expression that evaluates to `true` whenever the two instance's centers have the same coordinates?
 
-        **Answer**:   
+        __Answer:__   
         Cheking if any two `Ball` instances have their centers at the same coordinates requires the use of structural equality (a.k.a equivalence), like this: `ball1 == ball2`. The use of referential equality would produce incorrect results.  
  

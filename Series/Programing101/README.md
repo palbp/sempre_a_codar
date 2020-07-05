@@ -18,7 +18,7 @@ Initial requirements for following along:
   * [Values and objects](01-values-and-objects.md)
   * [Types and operations](02-types-and-operations.md)
   * [Identity and equivalence](03-identity-and-equivalence.md)
-  * Mutability and immutability
+  * [Mutability and immutability](04-mutability-and-immutability.md)
   * Summary (the programmer's universe so far)
 
 ## References

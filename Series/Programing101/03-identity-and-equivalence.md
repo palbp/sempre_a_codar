@@ -1,6 +1,6 @@
 # Identity and Equivalence 
 
-## Script / Outline (10 mins)
+## Script / Outline (25 mins) ([video](https://www.youtube.com/watch?v=UNWxFE18nXc&list=PL8XxoCaL3dBiJ_djQKKbbI4uN081F7Sgw))
 1. Values and objects, revisited
 2. Identity and equivalence
    1. What distiguishes them
@@ -10,7 +10,7 @@
       1. Operators `===` and `!==`
 3. Why do we care? (preparing for the next subject)
 
-## Exercises (20 mins) ([solution](./solutions/03-types-and-operations.md))
+## Exercises (20 mins) ([solution](./solutions/03-identity-and-equivalence.md))
 1. Consider the following program:
     ```kotlin
     data class Location(val x: Int, val y: Int)
