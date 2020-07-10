@@ -1,4 +1,4 @@
-# Values and Objects 
+# Types and Operations
 
 ## Script / Outline (45 mins)([video](https://www.youtube.com/watch?v=jJjUX7meSag&list=PL8XxoCaL3dBiJ_djQKKbbI4uN081F7Sgw))
 1. Type system: introduction

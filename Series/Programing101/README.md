@@ -14,12 +14,16 @@ Initial requirements for following along:
   * What do we need to follow along?
   * What will be the outcome?
 
-* The programmer's universe - part 1
+* The programmer's universe - part 1 (Representations)
   * [Values and objects](01-values-and-objects.md)
   * [Types and operations](02-types-and-operations.md)
   * [Identity and equivalence](03-identity-and-equivalence.md)
   * [Mutability and immutability](04-mutability-and-immutability.md)
-  * Summary (the programmer's universe so far)
+  * [Summary (the programmer's universe so far)](05-summary-data.md)
+
+* The programmer's universe - part 2 (Behaviour)
+  * Functions
+  * (Work in progress)
 
 ## References
 Along my journey I've studied a vast ammount of materials and therefore my "universe" has been built by them; it would be unfeasible to enumerate them all. It would also be useless to anyone trying to begin the Programmer's journey. Instead, I leave you my most recent inspiration sources, created by two great professionals: 
