@@ -8,7 +8,7 @@
    1. Substitution model (functional style)
    2. Instruction sequence and program state (imperative style)
 
-## Exercises (30 mins) ([solution - coming soon]())
+## Exercises (30 mins) ([solution](solutions/04-mutability-and-immutability.md))
 
  1. Consider the following program:
     ```kotlin
