@@ -1,6 +1,6 @@
 # Summary
 
-## Script / Outline (20 mins)([video]())
+## Script / Outline (30 mins)([video](https://www.youtube.com/watch?v=TN6bTrQRo48&list=PL8XxoCaL3dBiJ_djQKKbbI4uN081F7Sgw))
 1. Data representation
    1. Values (primitives)
    2. Aggregate (objects)
