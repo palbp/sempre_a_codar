@@ -7,6 +7,8 @@ Initial requirements for following along:
 * a browser
 * the will and the time (the latter is a function of the former)
 
+Discord channel: [Programming 101](https://discord.gg/dYgjGUG)
+
 ## Outline (work in progress) ([videos play list](https://www.youtube.com/playlist?list=PL8XxoCaL3dBiJ_djQKKbbI4uN081F7Sgw))
 
 * [Introduction (15 mins)](./00-introduction.md)
@@ -22,8 +24,9 @@ Initial requirements for following along:
   * [Summary (the programmer's universe so far)](05-summary-data.md)
 
 * The programmer's universe - part 2 (Behaviour)
-  * Functions
-  * (Work in progress)
+  * [Evaluation and execution](06-evaluation-and-execution.md)
+  * [Functions and effects](07-functions-and-effects.md)
+  * [Programs and programming models](08-programs-and-programming_models.md)
 
 ## References
 Along my journey I've studied a vast ammount of materials and therefore my "universe" has been built by them; it would be unfeasible to enumerate them all. It would also be useless to anyone trying to begin the Programmer's journey. Instead, I leave you my most recent inspiration sources, created by two great professionals: 
