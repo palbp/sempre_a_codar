@@ -1,6 +1,6 @@
 # Evaluation and execution
 
-## Script / Outline (30 mins) (video coming soon)
+## Script / Outline (75 mins) ([video](https://www.youtube.com/watch?v=T0ZqwChq13Y&list=PL8XxoCaL3dBiJ_djQKKbbI4uN081F7Sgw&index=8&t=0s))
 1. Expressions
    1. Operations, revisited: arithmetic, relational and logical
    2. Selection expressions: `if` and `when`
