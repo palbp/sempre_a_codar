@@ -35,7 +35,7 @@
       * `someLocation == aLocation`
       * `someLocation === aLocation`
       
-      **Sugestion**: Remember that `println(...)` can be used to display the value of an expression. Experiment with the playground and make sure that your *mental model*, expressed by the diagram drawn in the previous question, is able to explain the results.
+      **Suggestion**: Remember that `println(...)` can be used to display the value of an expression. Experiment with the playground and make sure that your *mental model*, expressed by the diagram drawn in the previous question, is able to explain the results.
   
 2. Consider the following program:    
     ```kotlin
@@ -57,7 +57,7 @@
          * `aBall.center == yetAnotherBall.center`
          * `aBall.center === yetAnotherBall.center`   
       
-        **Sugestion**: Draw the diagram of the program's state (your mental model) to make sure you get it right. And remember that you can experiment with `println(...)`    
+        **Suggestion**: Draw the diagram of the program's state (your mental model) to make sure you get it right. And remember that you can experiment with `println(...)`    
 
     2. Consider the type definitions `Location` and `Ball` of the previous program. For two arbitrary `Ball` instances, referred by variables `ball1` and `ball2`, what is the expression that evaluates to `true` whenever the two instance's centers have the same coordinates?
  

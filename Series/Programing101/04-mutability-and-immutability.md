@@ -43,7 +43,7 @@
       * `someLocation === aLocation`
       * `someLocation === anotherLocation`
       
-      **Sugestion**: Remember that `println(...)` can be used to display the value of an expression. Experiment with the playground and make sure that your *mental model*, expressed by the diagrams you draw are able to explain the results.
+      **Suggestion**: Remember that `println(...)` can be used to display the value of an expression. Experiment with the playground and make sure that your *mental model*, expressed by the diagrams you draw are able to explain the results.
   
 2. Consider the following program:    
     ```kotlin
@@ -72,6 +72,6 @@
          * `aBall.center.x`
          * `anotherBall.center.x`
       
-        **Sugestion**: Draw the diagrams of the program's state (your mental model) to make sure you get it right. And remember that you can experiment with `println(...)`   
+        **Suggestion**: Draw the diagrams of the program's state (your mental model) to make sure you get it right. And remember that you can experiment with `println(...)`   
 
     2. How many instances of type `Location` are created during the program's execution?
