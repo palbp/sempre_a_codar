@@ -14,7 +14,7 @@
    1. Substitution model: data flow
    2. Execution control: state machine
 
-## Exercises (20 mins) - (solution coming soon)
+## Exercises (20 mins) - ([solution](solutions/06-evaluation-and-execution.md))
 
 1. Consider the following program: (temperature values are expressed in degrees Celsius)
    
