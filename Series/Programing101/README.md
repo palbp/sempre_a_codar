@@ -27,6 +27,11 @@ Discord channel: [Programming 101](https://discord.gg/dYgjGUG)
   * [Evaluation and execution](06-evaluation-and-execution.md)
   * [Functions and effects](07-functions-and-effects.md)
   * [Programs and programming models](08-programs-and-programming_models.md)
+  * [Summary](09-summary-the-programmer-universe.md)
+
+* Building software: first steps
+  * Goal: Build a minimalistic Pong variant
+  * [Tooling up: the IDE](coming soon)
 
 ## References
 Along my journey I've studied a vast ammount of materials and therefore my "universe" has been built by them; it would be unfeasible to enumerate them all. It would also be useless to anyone trying to begin the Programmer's journey. Instead, I leave you my most recent inspiration sources, created by two great professionals: 
