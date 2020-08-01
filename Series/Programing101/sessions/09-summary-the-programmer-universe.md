@@ -1,6 +1,6 @@
 # Summary
 
-## Script / Outline (30 mins)(video coming soon)
+## Script / Outline (30 mins) ([video](https://www.youtube.com/watch?v=QsI1yOpmXss&list=PL8XxoCaL3dBiJ_djQKKbbI4uN081F7Sgw))
 1. Revisiting the elements of the programmer´s universe
    
    1. Data representations, a cornerstone of our mental model
@@ -30,6 +30,22 @@
    1. Can we understand it a little better now?
 
 
-## Exercises / Outline (30 mins)(video coming soon)
+## Exercises (30 mins) (solution coming soon)
+1. Consider the program [The bouncing ball](https://gist.github.com/palbp/55f8477f232b06f8bfdf7d30f4735d2a) explained during the session. Our goal is to make changes to the program so that it behaves as shown in this [video](assets/09-goal.mp4). What we see in the video is the ball's behaviour when we apply gravity to it. Cool, right? =)
 
- 
+   1. Modify the program so that the ball remains still at the center of the canvas.    
+      
+      __Hints__    
+      Look carefully at the `createBall` function. Modify it so that the behaviour is as expected and yes, **you only need to change this function**. Remember that a still ball is represented by a ball with zero velocity.
+
+   2. Next, we need to represent acceleration. Define the `Acceleration` class so that we are able to represent the ball's velocity variations. Modify the class `Ball` so it includes a new property, `acceleration`, of the newly created type `Acceleration`.
+   
+      __Hints__    
+      Acceleration is represented by a vector with two coordinates, `dvx` and `dvy`, which represent the variation to be applied to the ball's velocity. You will need to modify all the code that creates new ball instances so that it includes the new ball property. Once you complete those changes, the verifier should accept the new program version. The execution result didn't change, though.
+
+   3. Finally, let's apply acceleration to the ball and see what happens. Change the implementation of `move` function so that the ball's velocity changes over time according to the ball's acceleration. Also change the `createBall` function so that the ball is created with an acceleration simulating gravity towards the bottom of the canvas, like so `Acceleration(0.0, 1.0)`. Once you're done you should see the end result, as shown in this [video](assets/09-goal.mp4). 
+
+      __Hints__    
+      Remember that velocity is a vector representing location's variation over time. Similarly, acceleration is a vector representing velocity's variation over time. Applying acceleration to a ball's velocity is analogous to applying velocity to the ball's location.
+
+   4. Experiment with different acceleration vectors and see what happens. For example, try this one: `Acceleration(0.2, 1.0)`. Cool, right? =)

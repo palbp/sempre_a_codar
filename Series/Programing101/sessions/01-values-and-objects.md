@@ -49,4 +49,4 @@
 
 3. Consider the following diagram of a program's state. Write the code that creates the depicted elements. 
 
-    ![Diagram](./images/01-diagram.png "Question 3 diagram")
+    ![Diagram](assets/01-diagram.png "Question 3 diagram")
