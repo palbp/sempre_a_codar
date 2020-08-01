@@ -11,23 +11,23 @@ Discord channel: [Programming 101](https://discord.gg/dYgjGUG)
 
 ## Outline (work in progress) ([videos play list](https://www.youtube.com/playlist?list=PL8XxoCaL3dBiJ_djQKKbbI4uN081F7Sgw))
 
-* [Introduction (15 mins)](./00-introduction.md)
+* [Introduction (15 mins)](sessions/00-introduction.md)
   * To whom is the series designed for?
   * What do we need to follow along?
   * What will be the outcome?
 
 * The programmer's universe - part 1 (Representations)
-  * [Values and objects](01-values-and-objects.md)
-  * [Types and operations](02-types-and-operations.md)
-  * [Identity and equivalence](03-identity-and-equivalence.md)
-  * [Mutability and immutability](04-mutability-and-immutability.md)
-  * [Summary (the programmer's universe so far)](05-summary-data.md)
+  * [Values and objects](sessions/01-values-and-objects.md)
+  * [Types and operations](sessions/02-types-and-operations.md)
+  * [Identity and equivalence](sessions/03-identity-and-equivalence.md)
+  * [Mutability and immutability](sessions/04-mutability-and-immutability.md)
+  * [Summary (the programmer's universe so far)](sessions/05-summary-data.md)
 
 * The programmer's universe - part 2 (Behaviour)
-  * [Evaluation and execution](06-evaluation-and-execution.md)
-  * [Functions and effects](07-functions-and-effects.md)
-  * [Programs and programming models](08-programs-and-programming_models.md)
-  * [Summary](09-summary-the-programmer-universe.md)
+  * [Evaluation and execution](sessions/06-evaluation-and-execution.md)
+  * [Functions and effects](sessions/07-functions-and-effects.md)
+  * [Programs and programming models](sessions/08-programs-and-programming_models.md)
+  * [Summary](sessions/09-summary-the-programmer-universe.md)
 
 * Building software: first steps
   * Goal: Build a minimalistic Pong variant

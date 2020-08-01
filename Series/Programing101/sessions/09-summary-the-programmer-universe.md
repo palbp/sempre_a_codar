@@ -30,5 +30,6 @@
    1. Can we understand it a little better now?
 
 
+## Exercises / Outline (30 mins)(video coming soon)
 
  
