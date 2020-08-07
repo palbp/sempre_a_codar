@@ -16,7 +16,7 @@ Discord channel: [Programming 101](https://discord.gg/dYgjGUG)
   * What do we need to follow along?
   * What will be the outcome?
 
-* The programmer's universe - part 1 (Representations)
+* #### The programmer's universe - part 1 (Representations)
   * [Values and objects](sessions/01-values-and-objects.md)
   * [Types and operations](sessions/02-types-and-operations.md)
   * [Identity and equivalence](sessions/03-identity-and-equivalence.md)
@@ -31,9 +31,11 @@ Discord channel: [Programming 101](https://discord.gg/dYgjGUG)
 
 * Building software: first steps
   * Goal: Build a minimalistic [Pong](https://playpong.net/) variant
-  * [Tooling up: the IDE](.) (_coming soon_)
-  * [Coding session - Pong - part 1](.) (_coming soon_) 
+  * [Tooling up: the IDE](sessions/10-tooling-up-IDE.md)
+  * [Coding session - Pong - part 1](sessions/11-coding-pong-part1.md) (_coming soon_)   
+  * [Tooling up: debuggers](.) (_coming soon_)
   * [Coding session - Pong - part 2](.) (_coming soon_)
+  * [Coding session - Pong - part 3](.) (_coming soon_)
   * [Tooling up: version control](.) (_coming soon_)
 
 ## References
