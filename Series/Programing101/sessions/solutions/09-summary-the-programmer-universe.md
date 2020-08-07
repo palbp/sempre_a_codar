@@ -124,5 +124,6 @@
 
    4. Experiment with different acceleration vectors and see what happens. For example, try this one: `Acceleration(0.2, 1.0)`. Cool, right? =)
 
-      __Answer__
+      __Answer:__    
+
       Just have fun with it
