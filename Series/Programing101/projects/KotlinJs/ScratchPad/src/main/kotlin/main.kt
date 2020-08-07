@@ -10,13 +10,11 @@ import kotlin.random.Random
 data class Location(val x: Double, val y: Double)
 data class Velocity(val dx: Double, val dy: Double)
 data class Color(val rgb: String)
-data class Acceleration(val dvx:Double, val dvy: Double)
 
 data class Ball(
         val center: Location,
         val radius: Double,
         val velocity: Velocity,
-        val acceleration: Acceleration,
         val color: Color
 )
 
@@ -35,34 +33,32 @@ fun move(ball: Ball, canvas: HTMLCanvasElement): Ball {
     val newBall = Ball(
             Location(ball.center.x + ball.velocity.dx, ball.center.y + ball.velocity.dy),
             ball.radius,
-            Velocity(ball.velocity.dx + ball.acceleration.dvx, ball.velocity.dy + ball.acceleration.dvy),
-            ball.acceleration,
+            ball.velocity,
             ball.color
-        )
+    )
 
     return if (isInBounds(newBall, canvas)) newBall
     else Ball(
             Location(
-                if (newBall.velocity.dx < 0) max(0.0, newBall.center.x) else min(canvas.width - newBall.radius, newBall.center.x),
-                if (newBall.velocity.dy < 0) max(0.0, newBall.center.y) else min(canvas.height - newBall.radius, newBall.center.y)
+                    if (newBall.velocity.dx < 0) max(0.0, newBall.center.x) else min(canvas.width - newBall.radius, newBall.center.x),
+                    if (newBall.velocity.dy < 0) max(0.0, newBall.center.y) else min(canvas.height - newBall.radius, newBall.center.y)
             ),
             newBall.radius,
             Velocity(
-            (if (!isInXBounds(newBall, canvas)) -newBall.velocity.dx else newBall.velocity.dx) + ball.acceleration.dvx,
-            (if (!isInYBounds(newBall, canvas)) -newBall.velocity.dy else newBall.velocity.dy) + ball.acceleration.dvy
+                    if (!isInXBounds(newBall, canvas)) -newBall.velocity.dx else newBall.velocity.dx,
+                    if (!isInYBounds(newBall, canvas)) -newBall.velocity.dy else newBall.velocity.dy
             ),
-            ball.acceleration,
             newBall.color
-        )
+    )
 }
 
 fun createBall(ballRadius: Double, ballColor: Color, canvas: HTMLCanvasElement) = Ball(
         Location(canvas.width / 2.0, canvas.height / 2.0),
         ballRadius,
-        Velocity(dx = 0.0, dy = 0.0),
-        Acceleration(0.0, 1.0),
+        Velocity(0.0, 0.0),
         ballColor
-    )
+)
+
 
 fun main() {
     var context: CanvasRenderingContext2D = initializeCanvasContext()
@@ -87,7 +83,7 @@ fun initializeCanvasContext(): CanvasRenderingContext2D {
 fun clear(context: CanvasRenderingContext2D) {
     context.fillStyle = "#EEEEEE"
     context.fillRect(
-        0.0, 0.0, context.canvas.width.toDouble(), context.canvas.height.toDouble()
+            0.0, 0.0, context.canvas.width.toDouble(), context.canvas.height.toDouble()
     )
 }
 

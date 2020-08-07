@@ -30,12 +30,15 @@ Discord channel: [Programming 101](https://discord.gg/dYgjGUG)
   * [Summary](sessions/09-summary-the-programmer-universe.md)
 
 * Building software: first steps
-  * Goal: Build a minimalistic Pong variant
-  * [Tooling up: the IDE](coming soon)
+  * Goal: Build a minimalistic [Pong](https://playpong.net/) variant
+  * [Tooling up: the IDE](.) (_coming soon_)
+  * [Coding session - Pong - part 1](.) (_coming soon_) 
+  * [Coding session - Pong - part 2](.) (_coming soon_)
+  * [Tooling up: version control](.) (_coming soon_)
 
 ## References
 Along my journey I've studied a vast ammount of materials and therefore my "universe" has been built by them; it would be unfeasible to enumerate them all. It would also be useless to anyone trying to begin the Programmer's journey. Instead, I leave you my most recent inspiration sources, created by two great professionals: 
-* [Just Javascript](https://justjavascript.com/), by Dan Abramov
+* [Just Javascript](https://justjavascript.com/), by Dan Abramov -- unfortunately, he's no longer working on it 🙁
 * [The Nature of Code](https://www.youtube.com/user/shiffman/playlists?view=50&sort=dd&shelf_id=6), by Daniel Shiffman
 
 I'll make other references in the series's materials.
