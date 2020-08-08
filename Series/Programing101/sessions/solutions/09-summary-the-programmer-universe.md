@@ -1,6 +1,6 @@
 # Summary - The programmer's universe
 
-## Exercises solutions (video)(coming soon)
+## Exercises solutions ([video](https://www.youtube.com/watch?v=cA-eacDaDqE&list=PL8XxoCaL3dBiJ_djQKKbbI4uN081F7Sgw&index=12))
 1. Consider the program [The bouncing ball](https://gist.github.com/palbp/55f8477f232b06f8bfdf7d30f4735d2a) explained during the session. Our goal is to make changes to the program so that it behaves as shown in this [video](../assets/09-goal.mp4). What we see in the video is the ball's behaviour when we apply gravity to it. Cool, right? =)
 
    1. Modify the program so that the ball remains still at the center of the canvas.    

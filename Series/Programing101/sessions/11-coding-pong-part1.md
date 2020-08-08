@@ -1,6 +1,6 @@
 # Coding session - Pong - part 1
 
-## Script / Outline (video coming soon)
+## Script / Outline (90 mins) ([video](https://www.youtube.com/watch?v=IHIsBs91Pqs&list=PL8XxoCaL3dBiJ_djQKKbbI4uN081F7Sgw&index=14))
 1. Goal: Build a minimalistic [Pong](https://playpong.net/) variant
 2. Identifying the requirements and execution target
 3. Identifying the relevant representations

@@ -1,6 +1,6 @@
 # Tooling up: the IDE
 
-## Script / Outline (15 mins) (video coming soon)
+## Script / Outline (25 mins) ([video](https://www.youtube.com/watch?v=jC5jYANzw8M&list=PL8XxoCaL3dBiJ_djQKKbbI4uN081F7Sgw&index=13))
 1. Building software, introduction
    1. Build systems
       1. What's their purpose?
