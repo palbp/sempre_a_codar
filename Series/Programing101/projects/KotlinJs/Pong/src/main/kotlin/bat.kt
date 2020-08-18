@@ -10,10 +10,8 @@ fun keepBatInArenaBounds(bat: Bat, arenaHeight: Double): Bat {
     else Bat(
         Location(
             bat.location.x,
-            if (bat.location.y - bat.height / 2.0 - margin < 0.0)
-                max(bat.location.y, bat.height / 2.0 + margin)
-            else
-                min(bat.location.y, arenaHeight - bat.height / 2.0 - margin)
+            if (bat.location.y - bat.height / 2.0 - margin < 0.0) bat.height / 2.0 + margin
+            else arenaHeight - bat.height / 2.0 - margin
         ),
         bat.width,
         bat.height
