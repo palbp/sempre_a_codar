@@ -33,8 +33,7 @@ Discord channel: [Programming 101](https://discord.gg/dYgjGUG)
   * Goal: Build a minimalistic [Pong](https://playpong.net/) variant
   * [Tooling up: the IDE](sessions/10-tooling-up-IDE.md)
   * [Coding session - Pong - part 1](sessions/11-coding-pong-part1.md)
-  * [Tooling up: debuggers](.) (_coming soon_)
-  * [Coding session - Pong - part 2](.) (_coming soon_)
+  * [Coding session - Pong - part 2](sessions/12-coding-pong-part2.md)
   * [Coding session - Pong - part 3](.) (_coming soon_)
   * [Tooling up: version control](.) (_coming soon_)
 
