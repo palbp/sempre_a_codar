@@ -1,6 +1,6 @@
 # Coding session - Pong - part 3
 
-## Script / Outline [video](.)(__coming soon__)
+## Script / Outline [video](https://www.youtube.com/watch?v=ThFK-ZV6E-o&list=PL8XxoCaL3dBiJ_djQKKbbI4uN081F7Sgw&index=16)
 1. Goal: Build a minimalistic [Pong](https://playpong.net/) variant
 2. Tuning up the game's look and feel
    1. Centering the arena on the screen
