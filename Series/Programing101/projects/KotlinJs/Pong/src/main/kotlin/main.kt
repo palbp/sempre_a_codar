@@ -1,18 +1,17 @@
 import kotlin.browser.window
 
-
+/**
+ * The application entry point.
+ */
 fun main() {
 
     window.onload = {
 
-        val arenaWidth = 800
-        val arenaHeight = 600
-
-        var arena = initializeArena(arenaWidth, arenaHeight)
+        var arena = initializeArena(width = 800, height = 600)
         var batLocation = arena.bat.location
 
         window.onmousemove = {
-            batLocation = Location(arena.bat.location.x, it.clientY.toDouble())
+            batLocation = Location(arena.bat.location.x, it.offsetY.toDouble())
             true
         }
 
@@ -21,7 +20,7 @@ fun main() {
             true
         }
 
-        val context = initializeCanvasContext(arenaWidth, arenaHeight)
+        val context = initializeCanvasContext(arena.width, arena.height)
         window.setInterval({
             arena = doStep(arena, batLocation)
             drawArena(arena, context)

@@ -3,6 +3,12 @@ import org.w3c.dom.HTMLCanvasElement
 import kotlin.browser.document
 import kotlin.math.PI
 
+/**
+ * Initializes the drawing area.
+ * @param width     The drawing area width.
+ * @param height    The drawing area height.
+ * @return The drawing area.
+ */
 fun initializeCanvasContext(width: Int, height: Int): CanvasRenderingContext2D {
     val canvas = document.createElement("canvas") as HTMLCanvasElement
     canvas.width  = width
@@ -12,6 +18,10 @@ fun initializeCanvasContext(width: Int, height: Int): CanvasRenderingContext2D {
     return canvas.getContext("2d") as CanvasRenderingContext2D
 }
 
+/**
+ * Draws the arena background on the given drawing area.
+ * @param context   The drawing context.
+ */
 fun drawBackground(context: CanvasRenderingContext2D) {
     context.fillStyle = "#100000"
     context.fillRect(
@@ -27,6 +37,11 @@ fun drawBackground(context: CanvasRenderingContext2D) {
     context.stroke()
 }
 
+/**
+ * Draws the bat on the given drawing area.
+ * @param bat       The bat instance.
+ * @param context   The drawing context.
+ */
 fun drawBat(bat: Bat, context: CanvasRenderingContext2D) {
     context.fillStyle = "#575353"
     context.fillRect(
@@ -37,6 +52,11 @@ fun drawBat(bat: Bat, context: CanvasRenderingContext2D) {
     )
 }
 
+/**
+ * Draws the ball on the given drawing area.
+ * @param ball      The ball instance.
+ * @param context   The drawing context.
+ */
 fun drawBall(ball: Ball, context: CanvasRenderingContext2D) {
     context.fillStyle = "#B3B3B3"
     context.beginPath()
@@ -44,6 +64,11 @@ fun drawBall(ball: Ball, context: CanvasRenderingContext2D) {
     context.fill()
 }
 
+/**
+ * Draws the arena and its contents on the given drawing area.
+ * @param arena     The arena instance.
+ * @param context   The drawing context.
+ */
 fun drawArena(arena: Arena, context: CanvasRenderingContext2D) {
     drawBackground(context)
     drawBat(arena.bat, context)
