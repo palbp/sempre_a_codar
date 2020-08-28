@@ -35,7 +35,7 @@ Discord channel: [Programming 101](https://discord.gg/dYgjGUG)
   * [Coding session - Pong - part 1](sessions/11-coding-pong-part1.md)
   * [Coding session - Pong - part 2](sessions/12-coding-pong-part2.md)
   * [Coding session - Pong - part 3](sessions/13-coding-pong-part3.md)
-  * [Coding session - Pong - part 4](.) (_coming soon_)
+  * [Coding session - Pong - part 4](sessions/14-coding-pong-part4.md)
   * [Tooling up: version control](.) (_coming soon_)
 
 ## References
