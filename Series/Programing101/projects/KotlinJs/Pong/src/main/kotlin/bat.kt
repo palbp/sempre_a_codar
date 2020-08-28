@@ -89,6 +89,7 @@ fun isBatHittingBall(bat: Bat, ball: Ball): Boolean =
  * @param ball  The ball instance.
  * @return The deflected ball.
  */
+// TODO: Fix bug. If the ball's velocity is large enough, the collision may not be detected
 fun deflectBall(bat: Bat, ball: Ball) = Ball(
         Location(
                 if (ball.velocity.dx > 0) getBatLeftEdge(bat) - ball.radius else getBatRightEdge(bat) + ball.radius,

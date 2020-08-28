@@ -1,5 +1,7 @@
 import org.w3c.dom.CanvasRenderingContext2D
+import org.w3c.dom.CanvasTextAlign
 import org.w3c.dom.HTMLCanvasElement
+import org.w3c.dom.RIGHT
 import kotlin.browser.document
 import kotlin.math.PI
 
@@ -38,6 +40,18 @@ fun drawBackground(context: CanvasRenderingContext2D) {
 }
 
 /**
+ * Draws the score on the given drawing area.
+ * @param arena     The arena instance.
+ * @param context   The drawing context.
+ */
+fun drawScore(arena: Arena, context: CanvasRenderingContext2D) {
+    context.fillStyle = "#B3B3B3"
+    context.font = "52pt verdana"
+    context.textAlign = CanvasTextAlign.RIGHT
+    context.fillText(arena.score.toString(), context.canvas.width / 2.0 - 50.0, 100.0, 200.0)
+}
+
+/**
  * Draws the bat on the given drawing area.
  * @param bat       The bat instance.
  * @param context   The drawing context.
@@ -73,4 +87,5 @@ fun drawArena(arena: Arena, context: CanvasRenderingContext2D) {
     drawBackground(context)
     drawBat(arena.bat, context)
     drawBall(arena.ball, context)
+    drawScore(arena, context)
 }

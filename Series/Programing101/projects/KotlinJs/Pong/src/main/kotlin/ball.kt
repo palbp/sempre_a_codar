@@ -43,7 +43,7 @@ fun isBallInVerticalBounds(ball: Ball, height: Double) = ball.center.y - ball.ra
 
 /**
  * Moves the ball within the specified bounds and with its velocity.
- * @param ball  The ball instance.
+ * @param ball      The ball instance.
  * @param height    The height of the arena.
  * @return The moved ball.
  */
@@ -69,3 +69,12 @@ fun moveBall(ball: Ball, height: Double): Ball {
         else -> newBall
     }
 }
+
+/**
+ * Checks if the ball has entered the player's protected area, that is, if a loss should be
+ * accounted for.
+ * @param ball      The ball instance.
+ * @param width     The width of the arena.
+ */
+fun isLoss(ball: Ball, width: Int) = ball.center.x + ball.radius >= width
+

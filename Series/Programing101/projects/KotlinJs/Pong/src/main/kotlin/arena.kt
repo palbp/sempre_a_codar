@@ -9,8 +9,21 @@ import kotlin.random.Random
  * @property ball       The ball.
  * @property width      The width of the arena.
  * @property height     The height of the arena.
+ * @property score      The current score.
  */
-data class Arena(val bat: Bat, val ball: Ball, val width: Int, val height: Int)
+data class Arena(
+    val bat: Bat,
+    val ball: Ball,
+    val width: Int,
+    val height: Int,
+    val score: Int
+)
+
+fun initializeBall(width: Int, height: Int) = Ball(
+    Location(width / 2.0, height / 2.0),
+    5.0,
+    Velocity(0.0, 0.0)
+)
 
 /**
  * Creates an arena instance with the specified dimension.
@@ -25,7 +38,7 @@ fun initializeArena(width: Int, height: Int): Arena {
             Velocity(0.0, 0.0)
     )
     val bat = Bat(Location(width - 15.0, height / 2.0), 7.0, 80.0)
-    return Arena(bat, ball, width, height)
+    return Arena(bat, ball, width, height, 0)
 }
 
 /**
@@ -33,7 +46,7 @@ fun initializeArena(width: Int, height: Int): Arena {
  */
 fun getInitialVelocity(): Velocity {
     val alpha = Random.nextDouble(-PI/6, PI/6)
-    val magnitude = 15.0
+    val magnitude = 8.0
     return Velocity(magnitude * cos(alpha), magnitude * sin(alpha))
 }
 
@@ -49,12 +62,22 @@ fun doStep(arena: Arena, batLocation: Location): Arena {
             20.0
     )
     val ball = moveBall(arena.ball, arena.height.toDouble())
-    return Arena(
+    return if(isLoss(ball, arena.width))
+        Arena(
+            bat,
+            initializeBall(arena.width, arena.height),
+            arena.width,
+            arena.height,
+            arena.score + 1
+        )
+    else
+        Arena(
             bat,
             if(isBatHittingBall(bat, ball)) deflectBall(bat, ball) else ball,
             arena.width,
-            arena.height
-    )
+            arena.height,
+            arena.score
+        )
 }
 
 /**
@@ -68,5 +91,6 @@ fun start(arena: Arena) =
             arena.bat,
             Ball(arena.ball.center, arena.ball.radius, getInitialVelocity()),
             arena.width,
-            arena.height
+            arena.height,
+            arena.score
     )
