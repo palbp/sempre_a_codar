@@ -19,3 +19,11 @@ data class Velocity(val dx: Double, val dy: Double)
  * @return The new location.
  */
 fun add(location: Location, velocity: Velocity) = Location(location.x + velocity.dx, location.y + velocity.dy)
+
+/**
+ * Defines the representation for lines used for collision detection. A line is defined by two points, represented
+ * here by [Location] instances.
+ * @property start  The first point.
+ * @property end    The second point.
+ */
+data class Line(val start: Location, val end: Location)

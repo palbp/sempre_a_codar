@@ -16,25 +16,6 @@ fun isBallMoving(ball: Ball) = ball.velocity.dx != 0.0 || ball.velocity.dy != 0.
 /**
  * Checks whether the given ball is within the specified bounds.
  * @param ball      The ball instance.
- * @param width     The width of the arena.
- * @param height    The height of the arena.
- * @return A boolean value indicating if [ball] is within the arena's bounds or not.
- */
-fun isBallWithinBounds(ball: Ball, width: Double, height: Double) =
-        isBallInHorizontalBounds(ball, width) && isBallInVerticalBounds(ball, height)
-
-/**
- * Checks whether the given ball is within the specified bounds.
- * @param ball      The ball instance.
- * @param width     The width of the arena.
- * @return A boolean value indicating if [ball] is within the arena's bounds or not.
- */
-fun isBallInHorizontalBounds(ball: Ball, width: Double) = ball.center.x - ball.radius > 0 &&
-        ball.center.x + ball.radius < width
-
-/**
- * Checks whether the given ball is within the specified bounds.
- * @param ball      The ball instance.
  * @param height    The height of the arena.
  * @return A boolean value indicating if [ball] is within the arena's bounds or not.
  */

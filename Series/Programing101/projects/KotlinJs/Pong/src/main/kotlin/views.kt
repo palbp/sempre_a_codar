@@ -13,7 +13,7 @@ import kotlin.math.PI
  */
 fun initializeCanvasContext(width: Int, height: Int): CanvasRenderingContext2D {
     val canvas = document.createElement("canvas") as HTMLCanvasElement
-    canvas.width  = width
+    canvas.width = width
     canvas.height = height
     canvas.setAttribute("class", "arena")
     document.body?.appendChild(canvas)

@@ -12,17 +12,23 @@ import kotlin.random.Random
  * @property score      The current score.
  */
 data class Arena(
-    val bat: Bat,
-    val ball: Ball,
-    val width: Int,
-    val height: Int,
-    val score: Int
+        val bat: Bat,
+        val ball: Ball,
+        val width: Int,
+        val height: Int,
+        val score: Int
 )
 
+/**
+ * Creates a ball positioned at hte center of the arena.
+ * @param width     The arena width.
+ * @param height    The arena height.
+ * @return The ball instance.
+ */
 fun initializeBall(width: Int, height: Int) = Ball(
-    Location(width / 2.0, height / 2.0),
-    5.0,
-    Velocity(0.0, 0.0)
+        Location(width / 2.0, height / 2.0),
+        5.0,
+        Velocity(0.0, 0.0)
 )
 
 /**
@@ -45,8 +51,8 @@ fun initializeArena(width: Int, height: Int): Arena {
  * Generates the initial ball velocity.
  */
 fun getInitialVelocity(): Velocity {
-    val alpha = Random.nextDouble(-PI/6, PI/6)
-    val magnitude = 8.0
+    val alpha = Random.nextDouble(-PI / 5, PI / 5)
+    val magnitude = 16.0
     return Velocity(magnitude * cos(alpha), magnitude * sin(alpha))
 }
 
@@ -62,21 +68,21 @@ fun doStep(arena: Arena, batLocation: Location): Arena {
             20.0
     )
     val ball = moveBall(arena.ball, arena.height.toDouble())
-    return if(isLoss(ball, arena.width))
+    return if (isLoss(ball, arena.width))
         Arena(
-            bat,
-            initializeBall(arena.width, arena.height),
-            arena.width,
-            arena.height,
-            arena.score + 1
+                bat,
+                initializeBall(arena.width, arena.height),
+                arena.width,
+                arena.height,
+                arena.score + 1
         )
     else
         Arena(
-            bat,
-            if(isBatHittingBall(bat, ball)) deflectBall(bat, ball) else ball,
-            arena.width,
-            arena.height,
-            arena.score
+                bat,
+                maybeDeflectBall(bat, ball, arena.ball.center),
+                arena.width,
+                arena.height,
+                arena.score
         )
 }
 
@@ -86,11 +92,11 @@ fun doStep(arena: Arena, batLocation: Location): Arena {
  * @return The arena instance bearing a moving ball.
  */
 fun start(arena: Arena) =
-    if (isBallMoving(arena.ball)) arena
-    else Arena(
-            arena.bat,
-            Ball(arena.ball.center, arena.ball.radius, getInitialVelocity()),
-            arena.width,
-            arena.height,
-            arena.score
-    )
+        if (isBallMoving(arena.ball)) arena
+        else Arena(
+                arena.bat,
+                Ball(arena.ball.center, arena.ball.radius, getInitialVelocity()),
+                arena.width,
+                arena.height,
+                arena.score
+        )

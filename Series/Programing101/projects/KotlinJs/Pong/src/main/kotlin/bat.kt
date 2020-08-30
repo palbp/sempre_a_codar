@@ -14,13 +14,6 @@ data class Bat(val location: Location, val width: Double, val height: Double)
 fun getBatLeftEdge(bat: Bat) = bat.location.x - bat.width / 2
 
 /**
- * Gets the horizontal coordinate of the bat's right edge.
- * @param bat   The bat instance
- * @return The bat's right edge
- */
-fun getBatRightEdge(bat: Bat) = bat.location.x + bat.width / 2
-
-/**
  * Checks whether the given bat is within the specified bounds.
  * @param bat           The bat instance.
  * @param arenaHeight   The height of the arena.
@@ -59,42 +52,37 @@ fun keepBatInArenaBounds(bat: Bat, arenaHeight: Double, margin: Double) =
         if (isBatWithinBounds(bat, arenaHeight, margin)) bat
         else placeBatWithinBounds(bat, arenaHeight, margin)
 
-
 /**
- * Checks if the ball is within the bat's vertical bounds.
+ * Deflects the ball if it has been hit by the bat.
+ * @param bat                   The bat instance.
+ * @param ball                  The ball instance.
+ * @param previousBallLocation  The previous location of the [ball].
  */
-fun isBallWithinBatVerticalBounds(bat: Bat, ball: Ball) =
-        ball.center.y >= bat.location.y - bat.height / 2.0 && ball.center.y <= bat.location.y + bat.height / 2.0
+fun maybeDeflectBall(bat: Bat, ball: Ball, previousBallLocation: Location): Ball {
+    // Using the algorithm described in the links to detect collision between two lines
+    // http://paulbourke.net/geometry/pointlineplane/
+    // http://www.jeffreythompson.org/collision-detection/line-line.php
 
-/**
- * Checks if one of the bat's vertical edges is inside the ball.
- */
-fun isBatIntersectingBall(bat: Bat, ball: Ball) =
-        if (ball.velocity.dx > 0)
-            getBatLeftEdge(bat) >= ball.center.x - ball.radius && getBatLeftEdge(bat) <= ball.center.x + ball.radius
-        else
-            getBatRightEdge(bat) >= ball.center.x - ball.radius && getBatLeftEdge(bat) <= ball.center.x + ball.radius
+    val l1 = Line(previousBallLocation, ball.center)
+    val l2 = Line(
+            Location(getBatLeftEdge(bat), bat.location.y - bat.height / 2.0),
+            Location(getBatLeftEdge(bat), bat.location.y + bat.height / 2.0)
+    )
 
-/**
- * Checks whether the bat is hitting the ball.
- * @param bat   The bat instance.
- * @param ball  The ball instance.
- */
-fun isBatHittingBall(bat: Bat, ball: Ball): Boolean =
-        isBallWithinBatVerticalBounds(bat, ball) && isBatIntersectingBall(bat, ball)
+    val denominator = (l2.end.y - l2.start.y) * (l1.end.x - l1.start.x) - (l2.end.x - l2.start.x) * (l1.end.y - l1.start.y)
+    val uA = ((l2.end.x - l2.start.x) * (l1.start.y - l2.start.y) - (l2.end.y - l2.start.y) * (l1.start.x - l2.start.x)) /
+            denominator
+    val uB = ((l1.end.x - l1.start.x) * (l1.start.y - l2.start.y) - (l1.end.y - l1.start.y) * (l1.start.x - l2.start.x)) /
+            denominator
 
-/**
- * Deflects the ball on the bat.
- * @param bat   The bat instance.
- * @param ball  The ball instance.
- * @return The deflected ball.
- */
-// TODO: Fix bug. If the ball's velocity is large enough, the collision may not be detected
-fun deflectBall(bat: Bat, ball: Ball) = Ball(
-        Location(
-                if (ball.velocity.dx > 0) getBatLeftEdge(bat) - ball.radius else getBatRightEdge(bat) + ball.radius,
-                ball.center.y),
-        ball.radius,
-        Velocity(ball.velocity.dx * -1, ball.velocity.dy)
-)
+    return if (uA !in 0.0..1.0 || uB !in 0.0..1.0) ball
+    else Ball(
+            Location(
+                    l1.start.x + uA * (l1.end.x - l1.start.x) - ball.radius,
+                    l1.start.y + uA * (l1.end.y - l1.start.y)
+            ),
+            ball.radius,
+            Velocity(ball.velocity.dx * -1, ball.velocity.dy)
+    )
+}
 
