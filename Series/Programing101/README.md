@@ -30,13 +30,15 @@ Discord channel: [Programming 101](https://discord.gg/dYgjGUG)
   * [Summary](sessions/09-summary-the-programmer-universe.md)
 
 * #### Building software: first steps
-  * Goal: Build a minimalistic [Pong](https://playpong.net/) variant
   * [Tooling up: the IDE](sessions/10-tooling-up-IDE.md)
-  * [Coding session - Pong - part 1](sessions/11-coding-pong-part1.md)
-  * [Coding session - Pong - part 2](sessions/12-coding-pong-part2.md)
-  * [Coding session - Pong - part 3](sessions/13-coding-pong-part3.md)
-  * [Coding session - Pong - part 4](sessions/14-coding-pong-part4.md)
-  * [Tooling up: version control](.) (_coming soon_)
+  * Building a minimalistic [Pong](https://playpong.net/) variant
+    * [Coding session - Pong - part 1](sessions/11-coding-pong-part1.md)
+    * [Coding session - Pong - part 2](sessions/12-coding-pong-part2.md)
+    * [Coding session - Pong - part 3](sessions/13-coding-pong-part3.md)
+    * [Coding session - Pong - part 4](sessions/14-coding-pong-part4.md)
+  * [Tooling up: version control](sessions/15-tooling-up-version_control.md)
+  * [Basic principles of software design](.) (_coming soon_)
+  * [Coding challenge](.) (_coming soon_)
 
 ## References
 Along my journey I've studied a vast ammount of materials and therefore my "universe" has been built by them; it would be unfeasible to enumerate them all. It would also be useless to anyone trying to begin the Programmer's journey. Instead, I leave you my most recent inspiration sources, created by two great professionals: 
