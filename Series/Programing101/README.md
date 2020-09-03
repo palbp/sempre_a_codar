@@ -37,7 +37,7 @@ Discord channel: [Programming 101](https://discord.gg/dYgjGUG)
     * [Coding session - Pong - part 3](sessions/13-coding-pong-part3.md)
     * [Coding session - Pong - part 4](sessions/14-coding-pong-part4.md)
   * [Tooling up: version control](sessions/15-tooling-up-version_control.md)
-  * [Basic principles of software design](.) (_coming soon_)
+  * [Basic principles of software design](sessions/16-basic-principles-design.md)
   * [Coding challenge](.) (_coming soon_)
 
 ## References

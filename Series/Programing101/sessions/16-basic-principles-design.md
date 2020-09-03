@@ -1,6 +1,6 @@
 # Basic principles of software design
 
-## Script / Outline (15 mins) ([video](https://www.youtube.com/watch?v=muJbNAqIGEA&list=PL8XxoCaL3dBiJ_djQKKbbI4uN081F7Sgw&index=9))
+## Script / Outline (60 mins) (_video coming soon_)
 1. Mental constructs for dealing with complexity
    1. Dependency management:
       1. What is a dependency?
