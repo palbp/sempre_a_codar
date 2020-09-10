@@ -6,6 +6,10 @@
  */
 data class Ball(val center: Location, val radius: Double, val velocity: Velocity)
 
+// BEWARE: This is bad in so many ways. My boss made me do it! =P
+// TODO: Fix this!
+private val audioHandles: AudioHandles = initializeAudio()
+
 /**
  * Checks whether the ball is moving.
  * @param ball  The ball instance.
@@ -19,7 +23,7 @@ fun isBallMoving(ball: Ball) = ball.velocity.dx != 0.0 || ball.velocity.dy != 0.
  * @param height    The height of the arena.
  * @return A boolean value indicating if [ball] is within the arena's bounds or not.
  */
-fun isBallInVerticalBounds(ball: Ball, height: Double) = ball.center.y - ball.radius >= 0 &&
+private fun isBallInVerticalBounds(ball: Ball, height: Double) = ball.center.y - ball.radius >= 0 &&
         ball.center.y + ball.radius <= height
 
 /**
@@ -36,17 +40,23 @@ fun moveBall(ball: Ball, height: Double): Ball {
     )
 
     return when {
-        !isBallInVerticalBounds(newBall, height) -> Ball(
-                if (newBall.velocity.dy < 0) Location(newBall.center.x, newBall.radius)
-                else Location(newBall.center.x, height - newBall.radius),
-                newBall.radius,
-                Velocity(newBall.velocity.dx, newBall.velocity.dy * -1)
-        )
-        newBall.center.x - newBall.radius <= 0 -> Ball(
-                Location(newBall.radius, newBall.center.y),
-                newBall.radius,
-                Velocity(newBall.velocity.dx * -1, newBall.velocity.dy)
-        )
+        !isBallInVerticalBounds(newBall, height) -> {
+            audioHandles.hit.play()
+            Ball(
+                    if (newBall.velocity.dy < 0) Location(newBall.center.x, newBall.radius)
+                    else Location(newBall.center.x, height - newBall.radius),
+                    newBall.radius,
+                    Velocity(newBall.velocity.dx, newBall.velocity.dy * -1)
+            )
+        }
+        newBall.center.x - newBall.radius <= 0 -> {
+            audioHandles.hit.play()
+            Ball(
+                    Location(newBall.radius, newBall.center.y),
+                    newBall.radius,
+                    Velocity(newBall.velocity.dx * -1, newBall.velocity.dy)
+            )
+        }
         else -> newBall
     }
 }

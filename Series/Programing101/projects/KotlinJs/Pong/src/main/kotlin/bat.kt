@@ -6,12 +6,16 @@
  */
 data class Bat(val location: Location, val width: Double, val height: Double)
 
+// BEWARE: This is bad in so many ways. My boss made me do it! =P
+// TODO: Fix this!
+private val audioHandles: AudioHandles = initializeAudio()
+
 /**
  * Gets the horizontal coordinate of the bat's left edge.
  * @param bat   The bat instance
  * @return The bat's left edge
  */
-fun getBatLeftEdge(bat: Bat) = bat.location.x - bat.width / 2
+private fun getBatLeftEdge(bat: Bat) = bat.location.x - bat.width / 2
 
 /**
  * Checks whether the given bat is within the specified bounds.
@@ -20,7 +24,7 @@ fun getBatLeftEdge(bat: Bat) = bat.location.x - bat.width / 2
  * @param margin        The gap to be preserved between the bat and the vertical boundaries.
  * @return A boolean value indicating if [bat] is within the arena's bounds or not.
  */
-fun isBatWithinBounds(bat: Bat, arenaHeight: Double, margin: Double) =
+private fun isBatWithinBounds(bat: Bat, arenaHeight: Double, margin: Double) =
         bat.location.y - bat.height / 2.0 - margin >= 0.0 &&
                 bat.location.y + bat.height / 2.0 + margin <= arenaHeight
 
@@ -31,7 +35,7 @@ fun isBatWithinBounds(bat: Bat, arenaHeight: Double, margin: Double) =
  * @param margin        The gap to be preserved between the bat and the vertical boundaries.
  * @return A bat instance located within the arena's bounds.
  */
-fun placeBatWithinBounds(bat: Bat, arenaHeight: Double, margin: Double) = Bat(
+private fun placeBatWithinBounds(bat: Bat, arenaHeight: Double, margin: Double) = Bat(
         Location(
                 bat.location.x,
                 if (bat.location.y - bat.height / 2.0 - margin < 0.0) bat.height / 2.0 + margin
@@ -76,13 +80,16 @@ fun maybeDeflectBall(bat: Bat, ball: Ball, previousBallLocation: Location): Ball
             denominator
 
     return if (uA !in 0.0..1.0 || uB !in 0.0..1.0) ball
-    else Ball(
-            Location(
-                    l1.start.x + uA * (l1.end.x - l1.start.x) - ball.radius,
-                    l1.start.y + uA * (l1.end.y - l1.start.y)
-            ),
-            ball.radius,
-            Velocity(ball.velocity.dx * -1, ball.velocity.dy)
-    )
+    else {
+            audioHandles.batHit.play()
+            Ball(
+                    Location(
+                            l1.start.x + uA * (l1.end.x - l1.start.x) - ball.radius,
+                            l1.start.y + uA * (l1.end.y - l1.start.y)
+                    ),
+                    ball.radius,
+                    Velocity(ball.velocity.dx * -1, ball.velocity.dy)
+            )
+        }
 }
 

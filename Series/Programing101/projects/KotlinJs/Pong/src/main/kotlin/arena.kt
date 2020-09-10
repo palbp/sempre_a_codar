@@ -25,7 +25,7 @@ data class Arena(
  * @param height    The arena height.
  * @return The ball instance.
  */
-fun initializeBall(width: Int, height: Int) = Ball(
+private fun initializeBall(width: Int, height: Int) = Ball(
         Location(width / 2.0, height / 2.0),
         5.0,
         Velocity(0.0, 0.0)
@@ -38,11 +38,7 @@ fun initializeBall(width: Int, height: Int) = Ball(
  * @return The newly created arena instance.
  */
 fun initializeArena(width: Int, height: Int): Arena {
-    val ball = Ball(
-            Location(width / 2.0, height / 2.0),
-            5.0,
-            Velocity(0.0, 0.0)
-    )
+    val ball = initializeBall(width, height)
     val bat = Bat(Location(width - 15.0, height / 2.0), 7.0, 80.0)
     return Arena(bat, ball, width, height, 0)
 }
@@ -50,7 +46,7 @@ fun initializeArena(width: Int, height: Int): Arena {
 /**
  * Generates the initial ball velocity.
  */
-fun getInitialVelocity(): Velocity {
+private fun getInitialVelocity(): Velocity {
     val alpha = Random.nextDouble(-PI / 5, PI / 5)
     val magnitude = 16.0
     return Velocity(magnitude * cos(alpha), magnitude * sin(alpha))

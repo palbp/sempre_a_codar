@@ -10,8 +10,6 @@ fun main() {
         var arena = initializeArena(width = 800, height = 600)
         var batLocation = arena.bat.location
 
-        val audioHandles = initializeAudio()
-
         window.onmousemove = {
             batLocation = Location(arena.bat.location.x, it.offsetY)
             true
@@ -19,7 +17,7 @@ fun main() {
 
         window.onclick = {
             arena = start(arena)
-            audioHandles.batHit.play()
+            //audioHandles.hit.play()
             true
         }
 
