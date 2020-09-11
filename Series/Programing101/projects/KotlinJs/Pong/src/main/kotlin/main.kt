@@ -23,6 +23,7 @@ fun main() {
         val context = initializeCanvasContext(arena.width, arena.height)
         window.setInterval({
             arena = doStep(arena, batLocation)
+            maybePlaySound(arena)
             drawArena(arena, context)
         }, 25)
     }

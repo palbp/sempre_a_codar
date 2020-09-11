@@ -1,19 +1,21 @@
 import org.w3c.dom.Audio
-import org.w3c.dom.HTMLAudioElement
 
 /**
- * Defines the representation for holding the two instances that are used to play sound effects (a.k.a sfx).
- * @property batHit     The instance used to play the sfx of the ball hitting the bat.
- * @property hit        The instance used to play the sfx of all other ball collisions.
+ * Singleton object used to play the game's sounds.
  */
-data class AudioHandles(val batHit: HTMLAudioElement, val hit: HTMLAudioElement)
+private object Sounds {
+    val batHit = Audio("bat_hit_1.wav")
+    val defaultHit = Audio("hit.wav")
+}
 
 /**
- * Initializes the instances used to play sound effects, returning them.
- * @return  An aggregate of the existing sfx handles.
+ * Plays a sound if one should be played.
+ * @param arena The arena instance
  */
-fun initializeAudio() = AudioHandles(
-        Audio("bat_hit_1.wav"),
-        Audio("hit.wav")
-)
+fun maybePlaySound(arena: Arena) {
+    when (arena.ball.deflection) {
+        Deflection.BY_BAT -> Sounds.batHit.play()
+        Deflection.OTHER -> Sounds.defaultHit.play()
+    }
+}
 

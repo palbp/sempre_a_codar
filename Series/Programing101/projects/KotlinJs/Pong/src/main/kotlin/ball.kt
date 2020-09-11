@@ -3,12 +3,19 @@
  * @property center     The ball's location (its center).
  * @property radius     The ball's radius.
  * @property velocity   The ball's velocity.
+ * @property deflection The ball's deflection, if one occurred.
  */
-data class Ball(val center: Location, val radius: Double, val velocity: Velocity)
+data class Ball(
+        val center: Location,
+        val radius: Double,
+        val velocity: Velocity,
+        val deflection: Deflection? = null
+)
 
-// BEWARE: This is bad in so many ways. My boss made me do it! =P
-// TODO: Fix this!
-private val audioHandles: AudioHandles = initializeAudio()
+/**
+ * Defines the representation for identifying the existing ball deflections
+ */
+enum class Deflection { BY_BAT, OTHER }
 
 /**
  * Checks whether the ball is moving.
@@ -41,20 +48,20 @@ fun moveBall(ball: Ball, height: Double): Ball {
 
     return when {
         !isBallInVerticalBounds(newBall, height) -> {
-            audioHandles.hit.play()
             Ball(
                     if (newBall.velocity.dy < 0) Location(newBall.center.x, newBall.radius)
                     else Location(newBall.center.x, height - newBall.radius),
                     newBall.radius,
-                    Velocity(newBall.velocity.dx, newBall.velocity.dy * -1)
+                    Velocity(newBall.velocity.dx, newBall.velocity.dy * -1),
+                    Deflection.OTHER
             )
         }
         newBall.center.x - newBall.radius <= 0 -> {
-            audioHandles.hit.play()
             Ball(
                     Location(newBall.radius, newBall.center.y),
                     newBall.radius,
-                    Velocity(newBall.velocity.dx * -1, newBall.velocity.dy)
+                    Velocity(newBall.velocity.dx * -1, newBall.velocity.dy),
+                    Deflection.OTHER
             )
         }
         else -> newBall

@@ -6,10 +6,6 @@
  */
 data class Bat(val location: Location, val width: Double, val height: Double)
 
-// BEWARE: This is bad in so many ways. My boss made me do it! =P
-// TODO: Fix this!
-private val audioHandles: AudioHandles = initializeAudio()
-
 /**
  * Gets the horizontal coordinate of the bat's left edge.
  * @param bat   The bat instance
@@ -81,14 +77,14 @@ fun maybeDeflectBall(bat: Bat, ball: Ball, previousBallLocation: Location): Ball
 
     return if (uA !in 0.0..1.0 || uB !in 0.0..1.0) ball
     else {
-            audioHandles.batHit.play()
             Ball(
                     Location(
                             l1.start.x + uA * (l1.end.x - l1.start.x) - ball.radius,
                             l1.start.y + uA * (l1.end.y - l1.start.y)
                     ),
                     ball.radius,
-                    Velocity(ball.velocity.dx * -1, ball.velocity.dy)
+                    Velocity(ball.velocity.dx * -1, ball.velocity.dy),
+                    Deflection.BY_BAT
             )
         }
 }
