@@ -17,7 +17,6 @@ fun main() {
 
         window.onclick = {
             arena = start(arena)
-            //audioHandles.hit.play()
             true
         }
 

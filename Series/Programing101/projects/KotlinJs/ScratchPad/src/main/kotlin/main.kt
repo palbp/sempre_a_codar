@@ -5,7 +5,6 @@ import kotlin.browser.window
 import kotlin.math.PI
 import kotlin.math.max
 import kotlin.math.min
-import kotlin.random.Random
 
 data class Location(val x: Double, val y: Double)
 data class Velocity(val dx: Double, val dy: Double)

@@ -38,6 +38,9 @@ Discord channel: [Programming 101](https://discord.gg/dYgjGUG)
     * [Coding session - Pong - part 4](sessions/14-coding-pong-part4.md)
   * [Tooling up: version control](sessions/15-tooling-up-version_control.md)
   * [Basic principles of software design](sessions/16-basic-principles-design.md)
+  * Levelling up: Kotlin's type system, continued
+    * [Nullable types, enumeration types and singletons](sessions/17-nullable-enums-and-singletons.md)
+    * [Function types](sessions/18-function-types.md)
   * [Coding challenge](.) (_coming soon_)
 
 ## References

@@ -30,7 +30,7 @@
 4. User interaction related artifacts (the UI) is mostly composed of effects;
 5. Dependencies from _models_ to _views_, or any other artifacts that are dependent of the runtime environment as it is the case of primitives for playing sound effects, are _forbidden_. (This is how an architectural constraint usually looks like).
 
-Our current solution breaks this design. The rogue dependencies are represented by red arrows in the following diagram. 
+Our current solution ([at this point in time](https://github.com/palbp/sempre_a_codar/tree/04f36ca18d0f2fc150ed2c947427f1afb7abbd63)) breaks this design. The rogue dependencies are represented by red arrows in the following diagram. 
 We need to do better... (_coming soon_)
 
 ![Current Pong dependencies](assets/16-pong-dependencies.png "Current Pong dependencies")
