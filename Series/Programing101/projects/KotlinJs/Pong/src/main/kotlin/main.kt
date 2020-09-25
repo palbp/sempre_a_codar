@@ -21,11 +21,12 @@ fun main() {
         }
 
         val context = initializeCanvasContext(arena.width, arena.height)
-        window.setInterval({
+        fun animationStep() {
             arena = doStep(arena, batLocation)
             maybePlaySound(arena)
             drawArena(arena, context)
-        }, 25)
+        }
+        window.setInterval(::animationStep, 25)
     }
 }
 
