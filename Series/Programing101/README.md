@@ -41,7 +41,15 @@ Discord channel: [Programming 101](https://discord.gg/dYgjGUG)
   * Levelling up: Kotlin's type system, continued
     * [Nullable types, enumeration types and singletons](sessions/17-nullable-enums-and-singletons.md)
     * [Function types](sessions/18-function-types.md)
+  * Building a minimalistic [Pong](https://playpong.net/) variant, continued
+    * [Coding session - Pong - lets end this](sessions/19-coding-pong-part5.md)
   * [Coding challenge](.) (_coming soon_)
+  
+* #### Levelling up: Live. Die. Repeat. (_coming soon_)
+  * [Data structures, for we are many](.)(_coming soon_)
+  * [Repeat. Say what?](.)(_coming soon_)
+  * [Imperative vs functional showdown](.)(_coming soon_)
+  * [Tooling up: automatic tests](.)(_coming soon_)
 
 ## References
 Along my journey I've studied a vast ammount of materials and therefore my "universe" has been built by them; it would be unfeasible to enumerate them all. It would also be useless to anyone trying to begin the Programmer's journey. Instead, I leave you my most recent inspiration sources, created by two great professionals: 
