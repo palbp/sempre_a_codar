@@ -5,18 +5,21 @@ import kotlin.random.Random
 
 /**
  * Defines the representation of the game's arena.
- * @property bat        The player's bat.
- * @property ball       The ball.
- * @property width      The width of the arena.
- * @property height     The height of the arena.
- * @property score      The current score.
+ * @property playerBat      The player's bat.
+ * @property opponentBat    The opponent's bat.
+ * @property ball           The ball.
+ * @property width          The width of the arena.
+ * @property height         The height of the arena.
+ * @property opponentScore          The current score.
  */
 data class Arena(
-        val bat: Bat,
+        val playerBat: Bat,
+        val opponentBat: Bat,
         val ball: Ball,
         val width: Int,
         val height: Int,
-        val score: Int
+        val opponentScore: Int
+        // TODO: add player score
 )
 
 /**
@@ -39,8 +42,12 @@ private fun initializeBall(width: Int, height: Int) = Ball(
  */
 fun initializeArena(width: Int, height: Int): Arena {
     val ball = initializeBall(width, height)
-    val bat = Bat(Location(width - 15.0, height / 2.0), 7.0, 80.0)
-    return Arena(bat, ball, width, height, 0)
+    val batMargin = 15.0
+    val batWidth = 7.0
+    val batHeight = 80.0
+    val bat = Bat(Location(width - batMargin, height / 2.0), batWidth, batHeight)
+    val opponentBat = Bat(Location(batMargin, height / 2.0), batWidth, batHeight)
+    return Arena(bat, opponentBat, ball, width, height, 0)
 }
 
 /**
@@ -58,28 +65,37 @@ private fun getInitialVelocity(): Velocity {
  * @param batLocation   The location of the player's bat.
  */
 fun doStep(arena: Arena, batLocation: Location): Arena {
+    val margin = 20.0
     val bat = keepBatInArenaBounds(
             Bat(batLocation, 7.0, 80.0),
             arena.height.toDouble(),
-            20.0
+            margin
     )
     val ball = moveBall(arena.ball, arena.height.toDouble())
-    return if (isLoss(ball, arena.width))
-        Arena(
+
+    // TODO: Slow down the opponent bat's movement
+    val opponentBat = keepBatInArenaBounds(Bat(
+            Location(arena.opponentBat.location.x, ball.center.y), 7.0, 80.0
+    ), arena.height.toDouble(), margin)
+
+    return when (val result = checkMoveResult(ball, arena.width)) {
+        MoveResult.OK -> Arena(
                 bat,
+                opponentBat,
+                maybeDeflectBallInArena(arena, ball, arena.ball.center),
+                arena.width,
+                arena.height,
+                arena.opponentScore
+        )
+        else -> Arena(
+                bat,
+                arena.opponentBat,
                 initializeBall(arena.width, arena.height),
                 arena.width,
                 arena.height,
-                arena.score + 1
+                if (result == MoveResult.PLAYER_LOSS) arena.opponentScore + 1 else arena.opponentScore
         )
-    else
-        Arena(
-                bat,
-                maybeDeflectBall(bat, ball, arena.ball.center),
-                arena.width,
-                arena.height,
-                arena.score
-        )
+    }
 }
 
 /**
@@ -90,9 +106,18 @@ fun doStep(arena: Arena, batLocation: Location): Arena {
 fun start(arena: Arena) =
         if (isBallMoving(arena.ball)) arena
         else Arena(
-                arena.bat,
+                arena.playerBat,
+                arena.opponentBat,
                 Ball(arena.ball.center, arena.ball.radius, getInitialVelocity()),
                 arena.width,
                 arena.height,
-                arena.score
+                arena.opponentScore
         )
+
+/**
+ * TODO:
+ */
+fun maybeDeflectBallInArena(arena: Arena, ball: Ball, previousBallLocation: Location): Ball {
+    return maybeDeflectBall(getBatRightEdge(arena.opponentBat), ball, previousBallLocation) ?:
+        (maybeDeflectBall(getBatLeftEdge(arena.playerBat), ball, previousBallLocation) ?: ball)
+}

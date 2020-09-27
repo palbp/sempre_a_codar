@@ -48,7 +48,7 @@ fun drawScore(arena: Arena, context: CanvasRenderingContext2D) {
     context.fillStyle = "#B3B3B3"
     context.font = "52pt verdana"
     context.textAlign = CanvasTextAlign.RIGHT
-    context.fillText(arena.score.toString(), context.canvas.width / 2.0 - 50.0, 100.0, 200.0)
+    context.fillText(arena.opponentScore.toString(), context.canvas.width / 2.0 - 50.0, 100.0, 200.0)
 }
 
 /**
@@ -85,7 +85,8 @@ fun drawBall(ball: Ball, context: CanvasRenderingContext2D) {
  */
 fun drawArena(arena: Arena, context: CanvasRenderingContext2D) {
     drawBackground(context)
-    drawBat(arena.bat, context)
+    drawBat(arena.playerBat, context)
+    drawBat(arena.opponentBat, context)
     drawBall(arena.ball, context)
     drawScore(arena, context)
 }

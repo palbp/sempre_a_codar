@@ -11,7 +11,20 @@ data class Bat(val location: Location, val width: Double, val height: Double)
  * @param bat   The bat instance
  * @return The bat's left edge
  */
-private fun getBatLeftEdge(bat: Bat) = bat.location.x - bat.width / 2
+fun getBatLeftEdge(bat: Bat) = Line(
+        Location(bat.location.x - bat.width / 2, bat.location.y - bat.height / 2),
+        Location(bat.location.x - bat.width / 2, bat.location.y + bat.height / 2)
+)
+
+/**
+ * Gets the horizontal coordinate of the bat's right edge.
+ * @param bat   The bat instance
+ * @return The bat's left edge
+ */
+fun getBatRightEdge(bat: Bat) = Line(
+        Location(bat.location.x + bat.width / 2, bat.location.y - bat.height / 2),
+        Location(bat.location.x + bat.width / 2, bat.location.y + bat.height / 2)
+)
 
 /**
  * Checks whether the given bat is within the specified bounds.
@@ -51,41 +64,3 @@ private fun placeBatWithinBounds(bat: Bat, arenaHeight: Double, margin: Double) 
 fun keepBatInArenaBounds(bat: Bat, arenaHeight: Double, margin: Double) =
         if (isBatWithinBounds(bat, arenaHeight, margin)) bat
         else placeBatWithinBounds(bat, arenaHeight, margin)
-
-/**
- * Deflects the ball if it has been hit by the bat.
- * @param bat                   The bat instance.
- * @param ball                  The ball instance.
- * @param previousBallLocation  The previous location of the [ball].
- */
-fun maybeDeflectBall(bat: Bat, ball: Ball, previousBallLocation: Location): Ball {
-    // Using the algorithm described in the links to detect collision between two lines
-    // http://paulbourke.net/geometry/pointlineplane/
-    // http://www.jeffreythompson.org/collision-detection/line-line.php
-
-    val l1 = Line(previousBallLocation, ball.center)
-    val l2 = Line(
-            Location(getBatLeftEdge(bat), bat.location.y - bat.height / 2.0),
-            Location(getBatLeftEdge(bat), bat.location.y + bat.height / 2.0)
-    )
-
-    val denominator = (l2.end.y - l2.start.y) * (l1.end.x - l1.start.x) - (l2.end.x - l2.start.x) * (l1.end.y - l1.start.y)
-    val uA = ((l2.end.x - l2.start.x) * (l1.start.y - l2.start.y) - (l2.end.y - l2.start.y) * (l1.start.x - l2.start.x)) /
-            denominator
-    val uB = ((l1.end.x - l1.start.x) * (l1.start.y - l2.start.y) - (l1.end.y - l1.start.y) * (l1.start.x - l2.start.x)) /
-            denominator
-
-    return if (uA !in 0.0..1.0 || uB !in 0.0..1.0) ball
-    else {
-            Ball(
-                    Location(
-                            l1.start.x + uA * (l1.end.x - l1.start.x) - ball.radius,
-                            l1.start.y + uA * (l1.end.y - l1.start.y)
-                    ),
-                    ball.radius,
-                    Velocity(ball.velocity.dx * -1, ball.velocity.dy),
-                    Deflection.BY_BAT
-            )
-        }
-}
-
