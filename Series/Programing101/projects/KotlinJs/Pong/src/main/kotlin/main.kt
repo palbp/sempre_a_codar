@@ -8,10 +8,10 @@ fun main() {
     window.onload = {
 
         var arena = initializeArena(width = 800, height = 600)
-        var playerBatLocation = arena.playerBat.location
+        var playerBatLocation = arena.human.bat.location
 
         window.onmousemove = {
-            playerBatLocation = Location(arena.playerBat.location.x, it.offsetY)
+            playerBatLocation = Location(arena.human.bat.location.x, it.offsetY)
             true
         }
 
