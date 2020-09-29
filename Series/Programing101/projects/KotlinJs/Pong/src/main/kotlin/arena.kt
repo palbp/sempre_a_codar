@@ -1,8 +1,3 @@
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
-import kotlin.random.Random
-
 /**
  * Defines the representation of the game's arena.
  * @property playerBat      The player's bat.
@@ -22,17 +17,17 @@ data class Arena(
         // TODO: add player score
 )
 
+private const val MARGIN = 20.0
+
 /**
- * Creates a ball positioned at hte center of the arena.
- * @param width     The arena width.
- * @param height    The arena height.
- * @return The ball instance.
+ * Representation used to express the possible results of an animation step in the arena.
  */
-private fun initializeBall(width: Int, height: Int) = Ball(
-        Location(width / 2.0, height / 2.0),
-        5.0,
-        Velocity(0.0, 0.0)
-)
+private enum class MoveResult {
+    OK,
+    PLAYER_LOSS,
+    OPPONENT_LOSS
+}
+
 
 /**
  * Creates an arena instance with the specified dimension.
@@ -45,51 +40,63 @@ fun initializeArena(width: Int, height: Int): Arena {
     val batMargin = 15.0
     val batWidth = 7.0
     val batHeight = 80.0
-    val bat = Bat(Location(width - batMargin, height / 2.0), batWidth, batHeight)
+    val playerBat = Bat(Location(width - batMargin, height / 2.0), batWidth, batHeight)
     val opponentBat = Bat(Location(batMargin, height / 2.0), batWidth, batHeight)
-    return Arena(bat, opponentBat, ball, width, height, 0)
+    return Arena(playerBat, opponentBat, ball, width, height, 0)
 }
 
 /**
- * Generates the initial ball velocity.
+ * Checks if the ball either one of the protected areas, that is, if a loss should be
+ * accounted for.
+ * @param ball      The ball instance.
+ * @param width     The width of the arena.
  */
-private fun getInitialVelocity(): Velocity {
-    val alpha = Random.nextDouble(-PI / 5, PI / 5)
-    val magnitude = 16.0
-    return Velocity(magnitude * cos(alpha), magnitude * sin(alpha))
+private fun checkMoveResult(ball: Ball, width: Int): MoveResult = when {
+    ball.center.x + ball.radius >= width -> MoveResult.PLAYER_LOSS
+    ball.center.x - ball.radius <= 0 -> MoveResult.OPPONENT_LOSS
+    else -> MoveResult.OK
+}
+
+/**
+ * Corrects the ball's position to account for deflections on the given bats.
+ */
+private fun maybeDeflectBall(leftBat: Bat, rightBat: Bat, previousBall: Ball, ball: Ball): Ball {
+    return maybeDeflectBall(getBatRightEdge(leftBat), ball, previousBall.center) ?:
+    (maybeDeflectBall(getBatLeftEdge(rightBat), ball, previousBall.center) ?: ball)
 }
 
 /**
  * Computes the new arena according to its current state and the new location for the player's bat.
- * @param arena         The current arena instance.
- * @param batLocation   The location of the player's bat.
+ * @param arena                 The current arena instance.
+ * @param playerBatLocation     The new (tentative) location of the player's bat.
  */
-fun doStep(arena: Arena, batLocation: Location): Arena {
-    val margin = 20.0
-    val bat = keepBatInArenaBounds(
-            Bat(batLocation, 7.0, 80.0),
+fun doStep(arena: Arena, playerBatLocation: Location): Arena {
+    val playerBat = keepBatInVerticalBounds(
+            Bat(playerBatLocation, arena.playerBat.width, arena.playerBat.height),
             arena.height.toDouble(),
-            margin
+            MARGIN
     )
     val ball = moveBall(arena.ball, arena.height.toDouble())
 
     // TODO: Slow down the opponent bat's movement
-    val opponentBat = keepBatInArenaBounds(Bat(
-            Location(arena.opponentBat.location.x, ball.center.y), 7.0, 80.0
-    ), arena.height.toDouble(), margin)
+    val opponentBat = keepBatInVerticalBounds(Bat(
+            Location(arena.opponentBat.location.x, ball.center.y),
+            arena.opponentBat.width,
+            arena.opponentBat.height
+    ), arena.height.toDouble(), MARGIN)
 
     return when (val result = checkMoveResult(ball, arena.width)) {
         MoveResult.OK -> Arena(
-                bat,
+                playerBat,
                 opponentBat,
-                maybeDeflectBallInArena(arena, ball, arena.ball.center),
+                maybeDeflectBall(opponentBat, playerBat, arena.ball, ball),
                 arena.width,
                 arena.height,
                 arena.opponentScore
         )
         else -> Arena(
-                bat,
-                arena.opponentBat,
+                playerBat,
+                opponentBat,
                 initializeBall(arena.width, arena.height),
                 arena.width,
                 arena.height,
@@ -113,11 +120,3 @@ fun start(arena: Arena) =
                 arena.height,
                 arena.opponentScore
         )
-
-/**
- * TODO:
- */
-fun maybeDeflectBallInArena(arena: Arena, ball: Ball, previousBallLocation: Location): Ball {
-    return maybeDeflectBall(getBatRightEdge(arena.opponentBat), ball, previousBallLocation) ?:
-        (maybeDeflectBall(getBatLeftEdge(arena.playerBat), ball, previousBallLocation) ?: ball)
-}

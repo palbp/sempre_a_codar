@@ -27,3 +27,25 @@ fun add(location: Location, velocity: Velocity) = Location(location.x + velocity
  * @property end    The second point.
  */
 data class Line(val start: Location, val end: Location)
+
+/**
+ * Function used to compute the intersection point between two lines.
+ */
+fun computeIntersection(line1: Line, line2: Line): Location? {
+
+    // Using the algorithm described in the links to detect collision between two lines
+    // http://paulbourke.net/geometry/pointlineplane/
+    // http://www.jeffreythompson.org/collision-detection/line-line.php
+
+    val denominator = (line2.end.y - line2.start.y) * (line1.end.x - line1.start.x) - (line2.end.x - line2.start.x) * (line1.end.y - line1.start.y)
+    val uA = ((line2.end.x - line2.start.x) * (line1.start.y - line2.start.y) - (line2.end.y - line2.start.y) * (line1.start.x - line2.start.x)) /
+            denominator
+    val uB = ((line1.end.x - line1.start.x) * (line1.start.y - line2.start.y) - (line1.end.y - line1.start.y) * (line1.start.x - line2.start.x)) /
+            denominator
+
+    return if (uA !in 0.0..1.0 || uB !in 0.0..1.0) null
+    else Location(
+            line1.start.x + uA * (line1.end.x - line1.start.x),
+            line1.start.y + uA * (line1.end.y - line1.start.y)
+    )
+}

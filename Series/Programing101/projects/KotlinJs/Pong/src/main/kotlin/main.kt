@@ -8,10 +8,10 @@ fun main() {
     window.onload = {
 
         var arena = initializeArena(width = 800, height = 600)
-        var batLocation = arena.playerBat.location
+        var playerBatLocation = arena.playerBat.location
 
         window.onmousemove = {
-            batLocation = Location(arena.playerBat.location.x, it.offsetY)
+            playerBatLocation = Location(arena.playerBat.location.x, it.offsetY)
             true
         }
 
@@ -22,7 +22,7 @@ fun main() {
 
         val context = initializeCanvasContext(arena.width, arena.height)
         fun animationStep() {
-            arena = doStep(arena, batLocation)
+            arena = doStep(arena, playerBatLocation)
             maybePlaySound(arena)
             drawArena(arena, context)
         }
