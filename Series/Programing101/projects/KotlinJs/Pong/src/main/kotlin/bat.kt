@@ -44,15 +44,23 @@ private fun isBatWithinBounds(bat: Bat, height: Double, margin: Double) =
  * @param margin        The gap to be preserved between the bat and the vertical boundaries.
  * @return A bat instance located within the arena's bounds.
  */
-private fun placeBatWithinBounds(bat: Bat, height: Double, margin: Double) = Bat(
+private fun placeBatWithinBounds(bat: Bat, height: Double, margin: Double) = buildBatWith(
+        bat,
         Location(
                 bat.location.x,
                 if (bat.location.y - bat.height / 2.0 - margin < 0.0) bat.height / 2.0 + margin
                 else height - bat.height / 2.0 - margin
-        ),
-        bat.width,
-        bat.height
+        )
 )
+
+/**
+ * Builds a new bat instance from the given one ([bat]) and with a new location [newLocation].
+ * @param bat           The bat instance to be used as a prototype for the new instance.
+ * @param newLocation   The location for the new instance.
+ * @return A [Bat] ]instance with all its properties copied from [bat] and with [newLocation] as its
+ * location.
+ */
+fun buildBatWith(bat: Bat, newLocation: Location) = Bat(newLocation, bat.width, bat.height)
 
 /**
  * Keeps the bat within the arena bounds, regardless of its current position.

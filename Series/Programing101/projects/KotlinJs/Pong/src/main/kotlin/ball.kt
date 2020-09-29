@@ -18,15 +18,26 @@ data class Ball(
 )
 
 /**
- * Creates a ball positioned at the center of the area with the specified dimensions.
+ * Creates a stationary ball positioned at the center of the area with the specified dimensions.
  * @param width     The area width.
  * @param height    The area height.
  * @return The ball instance.
  */
-fun initializeBall(width: Int, height: Int) = Ball(
+fun createStationaryBall(width: Int, height: Int) = Ball(
         Location(width / 2.0, height / 2.0),
         5.0,
         Velocity(0.0, 0.0)
+)
+
+/**
+ * Builds a new ball instance from the given one ([ball]) and with a new location [newCenter].
+ * @param ball        The ball instance to be used as a prototype for the new instance.
+ * @param newCenter   The location for the new instance.
+ * @return A [Ball] instance with all its properties copied from [ball] (except its deflection property) and
+ * positioned at [newCenter]. Notice that the new ball instance is considered not deflected.
+ */
+fun buildBallWith(ball: Ball, newCenter: Location) = Ball(
+        newCenter, ball.radius, ball.velocity
 )
 
 /**
@@ -56,32 +67,30 @@ fun getInitialVelocity(): Velocity {
  * @param height    The height of the arena.
  * @return A boolean value indicating if [ball] is within the arena's bounds or not.
  */
-private fun isBallInVerticalBounds(ball: Ball, height: Double) = ball.center.y - ball.radius >= 0 &&
-        ball.center.y + ball.radius <= height
+private fun isBallInVerticalBounds(ball: Ball, height: Double) =
+        ball.center.y - ball.radius >= 0 &&
+                ball.center.y + ball.radius <= height
 
 /**
- * Moves the ball within the specified bounds and with its velocity.
+ * Moves the ball within the specified bounds, deflecting it if those bounds are reached.
  * @param ball      The ball instance.
  * @param height    The height of the arena.
  * @return The moved ball.
  */
 fun moveBall(ball: Ball, height: Double): Ball {
-    val newBall = Ball(
-            add(ball.center, ball.velocity),
-            ball.radius,
-            ball.velocity
-    )
 
+    fun deflectedLocation(ball: Ball): Location =
+            if (ball.velocity.dy < 0) Location(ball.center.x, ball.radius)
+            else Location(ball.center.x, height - ball.radius)
+
+    val newBall = buildBallWith(ball, add(ball.center, ball.velocity))
     return when {
-        !isBallInVerticalBounds(newBall, height) -> {
-            Ball(
-                    if (newBall.velocity.dy < 0) Location(newBall.center.x, newBall.radius)
-                    else Location(newBall.center.x, height - newBall.radius),
-                    newBall.radius,
-                    Velocity(newBall.velocity.dx, newBall.velocity.dy * -1),
-                    Deflection.OTHER
-            )
-        }
+        !isBallInVerticalBounds(newBall, height) -> Ball(
+                deflectedLocation(newBall),
+                newBall.radius,
+                Velocity(newBall.velocity.dx, newBall.velocity.dy * -1),
+                Deflection.OTHER
+        )
         else -> newBall
     }
 }
@@ -95,18 +104,18 @@ fun moveBall(ball: Ball, height: Double): Ball {
  */
 fun maybeDeflectBall(batEdge: Line, ball: Ball, previousBallLocation: Location): Ball? {
 
+    fun adjustBallLocation(location: Location, ball: Ball) = Location(
+            location.x + if (ball.velocity.dx < 0) ball.radius else -ball.radius,
+            location.y
+    )
+
     val intersectionPoint = computeIntersection(batEdge, Line(previousBallLocation, ball.center))
-    return if (intersectionPoint != null) {
-        Ball(
-                Location(
-                        intersectionPoint.x + if (ball.velocity.dx < 0) ball.radius else -ball.radius,
-                        intersectionPoint.y
-                ),
-                ball.radius,
-                Velocity(ball.velocity.dx * -1, ball.velocity.dy),
-                Deflection.BY_BAT
-        )
-    }
+    return if (intersectionPoint != null) Ball(
+            adjustBallLocation(intersectionPoint, ball),
+            ball.radius,
+            Velocity(ball.velocity.dx * -1, ball.velocity.dy),
+            Deflection.BY_BAT
+    )
     else null
 }
 

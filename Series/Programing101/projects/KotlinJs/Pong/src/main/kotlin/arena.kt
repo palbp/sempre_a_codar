@@ -36,7 +36,7 @@ private enum class MoveResult {
  * @return The newly created arena instance.
  */
 fun initializeArena(width: Int, height: Int): Arena {
-    val ball = initializeBall(width, height)
+    val ball = createStationaryBall(width, height)
     val batMargin = 15.0
     val batWidth = 7.0
     val batHeight = 80.0
@@ -97,7 +97,7 @@ fun doStep(arena: Arena, playerBatLocation: Location): Arena {
         else -> Arena(
                 playerBat,
                 opponentBat,
-                initializeBall(arena.width, arena.height),
+                createStationaryBall(arena.width, arena.height),
                 arena.width,
                 arena.height,
                 if (result == MoveResult.PLAYER_LOSS) arena.opponentScore + 1 else arena.opponentScore
