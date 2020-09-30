@@ -118,9 +118,10 @@ fun doStep(arena: Arena, playerBatLocation: Location): Arena {
             MARGIN
     )
     val ball = moveBall(arena.ball, arena.height.toDouble())
-
-    // TODO: Slow down the opponent bat's movement
-    val opponentBat = buildBatWith(arena.computer.bat, Location(arena.computer.bat.location.x, ball.center.y))
+    val opponentBat = if (isBallMoving(ball))
+        keepBatInVerticalBounds(moveTowards(arena.computer.bat, ball.center), arena.height.toDouble(), MARGIN)
+    else
+        buildBatWith(arena.computer.bat, Location(arena.computer.bat.location.x, ball.center.y))
 
     return when (val result = checkMoveResult(ball, arena.width)) {
         MoveResult.OK -> buildArenaWith(

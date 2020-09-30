@@ -1,3 +1,5 @@
+import kotlin.math.*
+
 /**
  * Defines the representation of the players' bats.
  * @property location   The bat's location (its center).
@@ -72,3 +74,18 @@ fun buildBatWith(bat: Bat, newLocation: Location) = Bat(newLocation, bat.width, 
 fun keepBatInVerticalBounds(bat: Bat, height: Double, margin: Double) =
         if (isBatWithinBounds(bat, height, margin)) bat
         else placeBatWithinBounds(bat, height, margin)
+
+/**
+ * The bat's speed.
+ */
+private const val BAT_SPEED = 3.0
+
+/**
+ * Moves the bat towards the ball. Its our little AI :P
+ */
+fun moveTowards(bat: Bat, destination: Location): Bat {
+    val maxDY = destination.y - bat.location.y
+    val actualDY = sign(maxDY) * BAT_SPEED
+    val velocity = Velocity(0.0, if (actualDY > 0) min(actualDY, maxDY) else max(maxDY, actualDY))
+    return buildBatWith(bat, add(bat.location, velocity))
+}
