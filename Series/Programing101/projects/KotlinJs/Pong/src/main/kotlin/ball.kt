@@ -1,4 +1,5 @@
 import kotlin.math.PI
+import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
@@ -109,11 +110,26 @@ fun maybeDeflectBall(batEdge: Line, ball: Ball, previousBallLocation: Location):
             location.y
     )
 
-    val intersectionPoint = computeIntersection(batEdge, Line(previousBallLocation, ball.center))
+    val ballTrajectory = Line(previousBallLocation, ball.center)
+
+    fun adjustVelocity(batEdge: Line, deflectionPoint: Location): Velocity {
+        val distanceToBatCenter = distanceToMidpoint(batEdge, deflectionPoint)
+        val batHeight = batEdge.end.y - batEdge.start.y
+        return when (distanceToBatCenter / batHeight) {
+            in 0.0..0.15 -> Velocity(ball.velocity.dx * -1, ball.velocity.dy)
+            in 0.15..0.8 -> {
+                val angleVariation = abs(cos(dotProduct(midpoint(batEdge), deflectionPoint)))
+                Velocity(ball.velocity.dx * -1, ball.velocity.dy + ball.velocity.dy * angleVariation)
+            }
+            else -> Velocity(ball.velocity.dx * -1, ball.velocity.dy * 2)
+        }
+    }
+
+    val intersectionPoint = intersection(batEdge, ballTrajectory)
     return if (intersectionPoint != null) Ball(
             adjustBallLocation(intersectionPoint, ball),
             ball.radius,
-            Velocity(ball.velocity.dx * -1, ball.velocity.dy),
+            adjustVelocity(batEdge, intersectionPoint),
             Deflection.BY_BAT
     )
     else null

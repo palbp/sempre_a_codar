@@ -76,9 +76,9 @@ fun keepBatInVerticalBounds(bat: Bat, height: Double, margin: Double) =
         else placeBatWithinBounds(bat, height, margin)
 
 /**
- * The bat's speed.
+ * Regulats the bat's max speed. The higher, the fast the bat can move.
  */
-private const val BAT_SPEED = 3.0
+private const val BAT_SPEED = 6.0
 
 /**
  * Moves the bat towards the ball. Its our little AI :P
