@@ -43,12 +43,12 @@
       * `someLocation === aLocation` --> `true`
       * `someLocation === anotherLocation` --> `false`
       
-      **Sugestion**: Remember that `println(...)` can be used to display the value of an expression. Experiment with the playground and make sure that your *mental model*, expressed by the diagrams you draw are able to explain the results.
+      **Sugestion**: Remember that `println(...)` can be used to display the value of an expression. Experiment with the playground and make sure that your *mental model*, expressed by the diagrams you draw, is able to explain the results.
   
 1. Consider the following program:    
     ```kotlin
     data class Location(var x: Int, var y: Int)
-    data class Ball(val center: Location, val radius: Int)
+    data class Ball(var center: Location, val radius: Int)
 
     fun main() {
         val aLocation = Location(20, 20)
