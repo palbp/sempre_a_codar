@@ -1,6 +1,6 @@
 # Coding session - Pong - Lets end this
 
-## Script / Outline (_video coming soon_)
+## Script / Outline (180 mins) ([video](https://www.youtube.com/watch?v=sYbs1UXJRNQ&list=PL8XxoCaL3dBiJ_djQKKbbI4uN081F7Sgw&index=21))
 1. Goal: Build a minimalistic [Pong](https://playpong.net/) variant
 2. Adding a computerized opponent (with a basic movement behaviour) 
    1. Adding a stationary opponent's bat to the arena

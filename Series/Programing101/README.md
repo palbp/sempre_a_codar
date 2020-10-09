@@ -43,7 +43,7 @@ Discord channel: [Programming 101](https://discord.gg/dYgjGUG)
     * [Function types](sessions/18-function-types.md)
   * Building a minimalistic [Pong](https://playpong.net/) variant, continued
     * [Coding session - Pong - lets end this](sessions/19-coding-pong-part5.md)
-    * [Pong - final solution overview](#building-software-first-steps) (_coming soon_)
+  * [Summary](sessions/20-summary-coding-pong.md)
   * [Coding challenge](#building-software-first-steps) (_coming soon_)
   
 * #### Levelling up: Live. Die. Repeat. (_coming soon_)
