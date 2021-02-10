@@ -1,4 +1,3 @@
 <resources>
-    <string name="app_name">DRAG</string>
-    <string name="title_activity_main2">My Compose App</string>
+    <string name="app_name">Draw And Guess</string>
 </resources>
