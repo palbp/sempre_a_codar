@@ -1,4 +1,4 @@
-# Building DRaw And Guess (DRAW) for Android
+# Building DRaw And Guess (DRAG) for Android
 
 Video series where we build from scratch an Android application inspired by the board game [Passa o Desenho](http://www.mebo.pt/index.php/pt/catalog/todos-os-produtos/passa-o-desenho). 
 
