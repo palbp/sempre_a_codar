@@ -12,7 +12,7 @@ import org.junit.Test
  * Local unit test, which will execute on the development machine (host).
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class DrawingTestSuite {
+class DrawingTests {
 
     private val aLine = Line().apply { this + Point() + Point(1, 1) }
 
