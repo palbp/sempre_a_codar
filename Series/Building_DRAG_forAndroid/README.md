@@ -12,7 +12,7 @@ In this application the drawing pad is virtual and each player uses his device t
 
 Some considerations regarding this endeavor: 
 * The application uses [Jetpack](https://developer.android.com/jetpack/getting-started) 
-* The application architecture is based on the [official reference architecture](https://developer.android.com/jetpack/guide), with small variations whenever it makes sense
+* The application architecture is based on the [official reference architecture](https://developer.android.com/jetpack/guide), with small variations whenever it makes sense. In particular it will be combined with ideas from the [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software))
 * Keep in mind that I will use this application as a way for experimenting with *not so* familiar techniques in the context of my continuous learning process, namely:
   * The design favors composition over techniques based on inheritance and polymorphism. The latter will only be used when enforced by the framework
   * The solution favors immutability. Mutations are only used when we are unable to avoid them
