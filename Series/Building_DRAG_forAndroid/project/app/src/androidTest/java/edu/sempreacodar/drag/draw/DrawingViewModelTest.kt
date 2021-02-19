@@ -1,11 +1,11 @@
-package edu.sempreacodar.drag
+package edu.sempreacodar.drag.draw
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import edu.sempreacodar.drag.draw.DrawingViewModel
-import edu.sempreacodar.drag.draw.countDownFrom
+import edu.sempreacodar.drag.draw.model.Drawing
 import edu.sempreacodar.drag.draw.model.GameTimer
+import edu.sempreacodar.drag.draw.model.Point
 import edu.sempreacodar.drag.draw.model.currentTimeSeconds
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,7 +29,7 @@ class DrawingViewModelTest {
         var publishToCount = false
         val publishedGameTimer = MutableLiveData<GameTimer>()
 
-        publishedGameTimer.observeWithDuring(observer = { publishToCount = true }) {
+        publishedGameTimer.observeWithDuringAsync(observer = { publishToCount = true }) {
             val countDown = launch {
                countDownFrom(oneSecond, publishedGameTimer)
             }
@@ -59,12 +59,19 @@ class DrawingViewModelTest {
     }
 
     @Test
-    fun viewModelMaybeStartTimer_inInitialState_startsTimer() = runBlocking(Dispatchers.Main) {
+    fun viewModelStartsWithAnEmptyDrawing() {
+        val sut = DrawingViewModel()
+        assertNotNull(sut.drawing.value)
+        assertTrue(sut.drawing.value?.lines?.isEmpty() ?: false)
+    }
+
+    @Test
+    fun maybeStartTimer_inInitialState_startsTimer() = runBlocking(Dispatchers.Main) {
 
         val sut = DrawingViewModel()
         var timerStarted = false
 
-        sut.timerValue.observeWithDuring(observer = { timerStarted = true }) {
+        sut.timerValue.observeWithDuringAsync(observer = { timerStarted = true }) {
             val countDown = sut.maybeStartTimer(GameTimer.fromSeconds(1))
             assertNotNull(countDown)
             countDown?.join()
@@ -74,7 +81,7 @@ class DrawingViewModelTest {
     }
 
     @Test
-    fun viewModelMaybeStartTimer_inNonInitialState_doesNotStartTimer(): Unit = runBlocking(Dispatchers.Main) {
+    fun maybeStartTimer_inNonInitialState_doesNotStartTimer(): Unit = runBlocking(Dispatchers.Main) {
 
         val sut = DrawingViewModel()
         val countDown = sut.maybeStartTimer(oneSecond)
@@ -83,15 +90,59 @@ class DrawingViewModelTest {
         assertNull(secondCountDown)
         countDown?.join()
     }
+
+    @Test
+    fun startLineAt_publishesDrawingWithTheNewLine() = runBlocking(Dispatchers.Main) {
+        val sut = DrawingViewModel()
+        var publishedDrawing: Drawing? = null
+
+        sut.drawing.observeWithDuring({ publishedDrawing = it}) {
+            val aPoint = Point(2F, 2F)
+            sut.startLineAt(aPoint)
+            assertEquals(1, publishedDrawing?.lines?.size)
+            assertEquals(1, publishedDrawing?.lines?.lastOrNull()?.points?.size)
+            assertEquals(aPoint, publishedDrawing?.lines?.lastOrNull()?.points?.last())
+        }
+    }
+
+    @Test
+    fun addToLine_publishesDrawingWithLastLineEndingAtThatPoint() = runBlocking(Dispatchers.Main) {
+        val sut = DrawingViewModel()
+        var publishedDrawing: Drawing? = null
+
+        sut.drawing.observeWithDuring({ publishedDrawing = it}) {
+            val addedPoint = Point(2F, 2F)
+            sut.startLineAt(Point(1F, 1F))
+            sut.addToLine(addedPoint)
+            assertEquals(addedPoint, publishedDrawing?.lines?.lastOrNull()?.points?.last())
+        }
+    }
 }
 
 /**
  * Helper function that ensures observation of [this] with [observer] and cleans up once
  * [testCode] finishes execution
  */
-private suspend fun <T> LiveData<T>.observeWithDuring(
+private suspend fun <T> LiveData<T>.observeWithDuringAsync(
         observer: ((T) -> Unit),
         testCode: suspend () -> Unit) {
+
+    try {
+        observeForever(observer)
+        testCode()
+    }
+    finally {
+        removeObserver(observer)
+    }
+}
+
+/**
+ * Helper function that ensures observation of [this] with [observer] and cleans up once
+ * [testCode] finishes execution
+ */
+private fun <T> LiveData<T>.observeWithDuring(
+        observer: ((T) -> Unit),
+        testCode: () -> Unit) {
 
     try {
         observeForever(observer)

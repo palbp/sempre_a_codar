@@ -1,14 +1,18 @@
 package edu.sempreacodar.drag.draw
 
+import   android.annotation.SuppressLint
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.TypedValue
+import android.view.MotionEvent
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import edu.sempreacodar.drag.databinding.ActivityDrawingBinding
 import edu.sempreacodar.drag.draw.DrawingActivity.Companion.TIMER_VALUE_EXTRA
 import edu.sempreacodar.drag.draw.DrawingActivity.Companion.WORD_EXTRA
 import edu.sempreacodar.drag.draw.model.GameTimer
+import edu.sempreacodar.drag.draw.model.Point
 
 /**
  * The drawing screen.
@@ -32,10 +36,9 @@ class DrawingActivity : AppCompatActivity() {
 
         viewModel.timerValue.observe(this) { renderUI() }
         viewModel.state.observe(this) { renderUI() }
+        viewModel.drawing.observe(this) { renderUI() }
 
         viewModel.maybeStartTimer(getTimerValueFromIntent())
-
-        // TODO: Collect user input and update drawing accordingly via ViewModel
     }
 
     /**
@@ -43,20 +46,35 @@ class DrawingActivity : AppCompatActivity() {
      * that the implementation is not dependent of any state transitions; it only depends on the
      * current state.
      */
+    @SuppressLint("ClickableViewAccessibility")
     private fun renderUI() {
         binding.word.text = getWordFromIntent()
         binding.timer.text = viewModel.timerValue.value.toString()
 
         val timerValue = viewModel.timerValue.value
-        fun isTimeRunningOut(): Boolean = viewModel.state.value == DrawingViewModel.State.DRAWING
+        fun isTimeRunningOut(): Boolean = viewModel.state.value != DrawingViewModel.State.INITIALIZED
                 && timerValue != null
                 && timerValue.toSeconds() < 10
 
-        val timerColor = if (isTimeRunningOut()) theme.getColor(android.R.attr.textColor)
+        val timerColor = if (!isTimeRunningOut()) theme.getColor(android.R.attr.textColor)
         else theme.getColor(android.R.attr.textColorHighlight)
         binding.timer.setTextColor(timerColor)
 
-        // TODO: render according to the screen's state
+        viewModel.drawing.value?.let { binding.drawingCanvas.drawing = it }
+
+        val touchListener: ((View, MotionEvent) -> Boolean)? =
+                if (viewModel.state.value == DrawingViewModel.State.DRAWING)
+                    { _, event ->
+                        when (event.action) {
+                            MotionEvent.ACTION_DOWN -> { viewModel.startLineAt(Point(event.x, event.y)); true }
+                            MotionEvent.ACTION_MOVE -> { viewModel.addToLine(Point(event.x, event.y)); true }
+                            MotionEvent.ACTION_UP -> { viewModel.endLineAt(Point(event.x, event.y)); true }
+                            else -> false
+                        }
+                    }
+                else null
+
+        binding.drawingCanvas.setOnTouchListener(touchListener)
     }
 
     /**

@@ -1,8 +1,5 @@
 package edu.sempreacodar.drag.draw.model
 
-import edu.sempreacodar.drag.draw.Line
-import edu.sempreacodar.drag.draw.Point
-import edu.sempreacodar.drag.draw.plus
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -20,17 +17,25 @@ class LineTests {
     }
 
     @Test
+    fun startNewLineAt_returnsALineWithASinglePoint() {
+        val thePoint = Point(1F, 1F)
+        val sut = startNewLineAt(thePoint)
+        assertEquals(1, sut.points.size)
+        assertEquals(thePoint, sut.points.first())
+    }
+
+    @Test
     fun addPointToEmptyLine_returnsLineWithOnePoint() {
         val emptyLine = Line()
-        val sut = emptyLine + Point(1, 1)
+        val sut = emptyLine + Point(1F, 1F)
         assertEquals(1, sut.points.size)
     }
 
     @Test
     fun addPointToNonEmptyLine_returnsLineWithNewPoint() {
-        val line = Line(listOf(Point(1, 1)))
-        val sut = line + Point(2, 2)
+        val line = Line(listOf(Point(1F, 1F)))
+        val sut = line + Point(2F, 2F)
         assertEquals(2, sut.points.size)
-        assertTrue(sut.points.contains(Point(2, 2)))
+        assertTrue(sut.points.contains(Point(2F, 2F)))
     }
 }
