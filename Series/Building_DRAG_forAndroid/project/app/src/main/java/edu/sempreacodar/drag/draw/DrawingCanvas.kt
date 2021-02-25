@@ -6,8 +6,8 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
-import edu.sempreacodar.drag.draw.model.Drawing
-import edu.sempreacodar.drag.draw.model.Line
+import edu.sempreacodar.drag.model.Drawing
+import edu.sempreacodar.drag.model.Line
 
 /**
  * Custom view used to draw on the screen.

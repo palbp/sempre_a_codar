@@ -1,4 +1,4 @@
-package edu.sempreacodar.drag.draw.model
+package edu.sempreacodar.drag.model
 
 import org.junit.Assert
 import org.junit.Assert.assertEquals

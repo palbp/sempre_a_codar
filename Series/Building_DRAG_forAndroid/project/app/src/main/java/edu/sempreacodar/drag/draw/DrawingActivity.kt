@@ -1,6 +1,6 @@
 package edu.sempreacodar.drag.draw
 
-import   android.annotation.SuppressLint
+import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.TypedValue
@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import edu.sempreacodar.drag.databinding.ActivityDrawingBinding
 import edu.sempreacodar.drag.draw.DrawingActivity.Companion.TIMER_VALUE_EXTRA
 import edu.sempreacodar.drag.draw.DrawingActivity.Companion.WORD_EXTRA
-import edu.sempreacodar.drag.draw.model.GameTimer
-import edu.sempreacodar.drag.draw.model.Point
+import edu.sempreacodar.drag.model.GameTimer
+import edu.sempreacodar.drag.model.Point
 
 /**
  * The drawing screen.
@@ -81,7 +81,7 @@ class DrawingActivity : AppCompatActivity() {
      * Helper method used to get the word to be drawn from the received intent
      */
     private fun getWordFromIntent() =
-        if (intent.hasExtra(WORD_EXTRA)) intent.getStringExtra(WORD_EXTRA)
+        if (intent.hasExtra(WORD_EXTRA)) intent.getStringExtra(WORD_EXTRA) as String
         else "Pintainho"
 
     /**

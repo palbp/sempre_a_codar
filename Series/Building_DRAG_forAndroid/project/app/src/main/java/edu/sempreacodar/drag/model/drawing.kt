@@ -1,4 +1,4 @@
-package edu.sempreacodar.drag.draw.model
+package edu.sempreacodar.drag.model
 
 /**
  * Represents points in the drawing.

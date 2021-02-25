@@ -3,10 +3,10 @@ package edu.sempreacodar.drag.draw
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import edu.sempreacodar.drag.draw.model.Drawing
-import edu.sempreacodar.drag.draw.model.GameTimer
-import edu.sempreacodar.drag.draw.model.Point
-import edu.sempreacodar.drag.draw.model.currentTimeSeconds
+import edu.sempreacodar.drag.model.Drawing
+import edu.sempreacodar.drag.model.GameTimer
+import edu.sempreacodar.drag.model.Point
+import edu.sempreacodar.drag.model.currentTimeSeconds
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking

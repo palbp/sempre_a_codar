@@ -1,4 +1,4 @@
-package edu.sempreacodar.drag.draw.ui.theme
+package edu.sempreacodar.drag.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
