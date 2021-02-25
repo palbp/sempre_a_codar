@@ -1,15 +1,16 @@
 package edu.sempreacodar.drag.draw
 
 import android.os.Bundle
+import android.view.MotionEvent
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import edu.sempreacodar.drag.databinding.ActivityDrawingBinding
 import edu.sempreacodar.drag.draw.NewDrawingActivity.Companion.TIMER_VALUE_EXTRA
 import edu.sempreacodar.drag.draw.NewDrawingActivity.Companion.WORD_EXTRA
 import edu.sempreacodar.drag.model.GameTimer
+import edu.sempreacodar.drag.model.Point
 import edu.sempreacodar.drag.ui.theme.DRAGTheme
 
 /**
@@ -25,7 +26,6 @@ class NewDrawingActivity : AppCompatActivity() {
         const val TIMER_VALUE_EXTRA = "TIMER_VALUE_EXTRA_KEY"
     }
 
-    private val binding by lazy { ActivityDrawingBinding.inflate(layoutInflater) }
     private val viewModel by viewModels<DrawingViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,12 +36,23 @@ class NewDrawingActivity : AppCompatActivity() {
                 Surface(color = MaterialTheme.colors.background) {
                     NewDrawingActivityLayout(
                         word = getWordFromIntent(),
-                        timer = getTimerValueFromIntent(),
-                        drawing = viewModel.drawing.value
+                        timer = viewModel.timerValue,
+                        drawing = viewModel.drawing,
+                        onTouch = {
+                            val point = Point(it.x, it.y)
+                            when (it.action) {
+                                MotionEvent.ACTION_DOWN -> { viewModel.startLineAt(point); true }
+                                MotionEvent.ACTION_MOVE -> { viewModel.addToLine(point); true }
+                                MotionEvent.ACTION_UP -> { viewModel.endLineAt(point); true }
+                                else -> false
+                            }
+                        }
                     )
                 }
             }
         }
+
+        viewModel.maybeStartTimer(getTimerValueFromIntent())
     }
 
     /**

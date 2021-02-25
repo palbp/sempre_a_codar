@@ -7,7 +7,7 @@ import java.lang.System.currentTimeMillis
 /**
  * Represents the time remaining for making a game move (draw or guess)
  */
-class GameTimer (val minutes: Int = 0, val seconds: Int = 0) {
+class GameTimer private constructor(val minutes: Int = 0, val seconds: Int = 0) {
 
     companion object {
         fun fromSeconds(totalSeconds: Int) = GameTimer(

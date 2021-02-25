@@ -99,9 +99,9 @@ class DrawingViewModelTest {
         sut.drawing.observeWithDuring({ publishedDrawing = it}) {
             val aPoint = Point(2F, 2F)
             sut.startLineAt(aPoint)
-            assertEquals(1, publishedDrawing?.lines?.size)
-            assertEquals(1, publishedDrawing?.lines?.lastOrNull()?.points?.size)
-            assertEquals(aPoint, publishedDrawing?.lines?.lastOrNull()?.points?.last())
+            assertNotNull(publishedDrawing?.lastLine)
+            assertEquals(aPoint, publishedDrawing?.lastLine?.points?.last())
+            assertTrue(publishedDrawing?.lines?.isEmpty() ?: false)
         }
     }
 
@@ -111,10 +111,27 @@ class DrawingViewModelTest {
         var publishedDrawing: Drawing? = null
 
         sut.drawing.observeWithDuring({ publishedDrawing = it}) {
-            val addedPoint = Point(2F, 2F)
-            sut.startLineAt(Point(1F, 1F))
+            val aPoint = Point(2F, 2F)
+            sut.startLineAt(aPoint)
+            assertEquals(aPoint, publishedDrawing?.lastLine?.points?.last())
+            assertTrue(publishedDrawing?.lines?.isEmpty() ?: false)
+        }
+    }
+
+
+    @Test
+    fun startLineAt_publishesDrawingWithNewLineAtEndAndPreviousLastLineAddedToList() = runBlocking(Dispatchers.Main) {
+        val sut = DrawingViewModel()
+        var publishedDrawing: Drawing? = null
+        sut.startLineAt(Point(1F, 1F))
+        sut.endLineAt(Point(2F, 2F))
+
+        sut.drawing.observeWithDuring({ publishedDrawing = it}) {
+            val addedPoint = Point(4F, 4F)
+            sut.startLineAt(Point(3F, 3F))
             sut.addToLine(addedPoint)
-            assertEquals(addedPoint, publishedDrawing?.lines?.lastOrNull()?.points?.last())
+            assertEquals(addedPoint, publishedDrawing?.lastLine?.points?.last())
+            assertTrue(publishedDrawing?.lines?.isNotEmpty() ?: false)
         }
     }
 }

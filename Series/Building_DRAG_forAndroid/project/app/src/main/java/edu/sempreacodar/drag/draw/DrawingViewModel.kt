@@ -35,7 +35,7 @@ class DrawingViewModel : ViewModel() {
     /**
      * The current drawing
      */
-    val drawing: LiveData<Drawing> = MutableLiveData(Drawing())
+    val drawing: LiveData<Drawing> = MutableLiveData(Drawing.EMPTY)
     private val _drawing = drawing as MutableLiveData<Drawing>
 
     /**

@@ -23,19 +23,38 @@ fun startNewLineAt(point: Point) = Line(listOf(point))
  */
 operator fun Line.plus(point: Point) = Line(points + point)
 
-// TODO: Reevaluate the need to change the Drawing representation for making the operation of
-//  adding a point to the last line of the drawing cheaper
-
 /**
  * Represents the drawing, which is comprised of a set of [Line].
  */
-data class Drawing(val lines: List<Line> = listOf())
+class Drawing private constructor(val lines: List<Line> = listOf(), val lastLine: Line? = null) {
+    companion object {
+        fun from(lines: List<Line> = listOf()) = when (lines.size) {
+            0 -> Drawing()
+            1 -> Drawing(lastLine = lines.last())
+            else -> Drawing(lines = lines.dropLast(1), lines.last())
+        }
+        fun from(lines: List<Line>, lastLine: Line) = Drawing(lines, lastLine)
+        val EMPTY = Drawing()
+    }
+}
+
+/**
+ * Iterates over the drawing's lines applying [action] to each line of the drawing.
+ * @param [action]  the action to be applied to each line
+ */
+fun Drawing.forEach(action: (Line) -> Unit) {
+    lines.forEach(action)
+    if (lastLine != null) action(lastLine)
+}
 
 /**
  * Extension function that adds [line] to the current drawing.
  * @return the new drawing instance
  */
-operator fun Drawing.plus(line: Line) = Drawing(lines +line)
+operator fun Drawing.plus(line: Line) = Drawing.from(
+    if (lastLine == null) lines else lines + lastLine,
+    line
+)
 
 /**
  * Extension function that adds a point to the drawing's last line.
@@ -43,4 +62,4 @@ operator fun Drawing.plus(line: Line) = Drawing(lines +line)
  * @return the new [Drawing] instance
  */
 fun Drawing.addToLastLine(point: Point): Drawing =
-        Drawing(lines.dropLast(1) + (lines.last() + point))
+    Drawing.from(lines, if (lastLine == null) startNewLineAt(point) else lastLine + point)

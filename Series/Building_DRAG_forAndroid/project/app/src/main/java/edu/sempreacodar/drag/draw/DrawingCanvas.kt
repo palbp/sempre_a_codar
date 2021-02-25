@@ -8,6 +8,7 @@ import android.util.TypedValue
 import android.view.View
 import edu.sempreacodar.drag.model.Drawing
 import edu.sempreacodar.drag.model.Line
+import edu.sempreacodar.drag.model.forEach
 
 /**
  * Custom view used to draw on the screen.
@@ -31,7 +32,7 @@ class DrawingCanvas(ctx: Context, attrs: AttributeSet?, defStyleAttr: Int)
     /**
      * The associated model
      */
-    var drawing: Drawing = Drawing()
+    var drawing: Drawing = Drawing.EMPTY
         set(value) { field = value; invalidate() }
 
     override fun onDraw(canvas: Canvas) {
@@ -40,7 +41,7 @@ class DrawingCanvas(ctx: Context, attrs: AttributeSet?, defStyleAttr: Int)
         drawDrawing(canvas)
     }
 
-    private fun drawDrawing(canvas: Canvas) = drawing.lines.forEach {
+    private fun drawDrawing(canvas: Canvas) = drawing.forEach {
         drawLine(it, canvas)
     }
 
