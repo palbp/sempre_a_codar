@@ -7,8 +7,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import edu.sempreacodar.drag.draw.NewDrawingActivity.Companion.TIMER_VALUE_EXTRA
-import edu.sempreacodar.drag.draw.NewDrawingActivity.Companion.WORD_EXTRA
+import edu.sempreacodar.drag.draw.DrawingActivity.Companion.TIMER_VALUE_EXTRA
+import edu.sempreacodar.drag.draw.DrawingActivity.Companion.WORD_EXTRA
 import edu.sempreacodar.drag.model.GameTimer
 import edu.sempreacodar.drag.model.Point
 import edu.sempreacodar.drag.ui.theme.DRAGTheme
@@ -19,7 +19,7 @@ import edu.sempreacodar.drag.ui.theme.DRAGTheme
  * The activity receives two extras: one with the word to be drawn, identified by [WORD_EXTRA];
  * the other bearing the Int with the timer value in seconds, identified by [TIMER_VALUE_EXTRA]
  */
-class NewDrawingActivity : AppCompatActivity() {
+class DrawingActivity : AppCompatActivity() {
 
     companion object {
         const val WORD_EXTRA = "WORD_EXTRA_KEY"
@@ -44,7 +44,7 @@ class NewDrawingActivity : AppCompatActivity() {
             DRAGTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    NewDrawingActivityLayout(
+                    DrawingActivityLayout(
                         word = getWordFromIntent(),
                         viewModel = viewModel,
                         onTouch = {

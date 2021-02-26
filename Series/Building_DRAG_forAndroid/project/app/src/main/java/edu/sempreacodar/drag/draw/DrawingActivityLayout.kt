@@ -20,8 +20,15 @@ import edu.sempreacodar.drag.model.GameTimer
 import edu.sempreacodar.drag.model.sec
 import edu.sempreacodar.drag.ui.theme.DRAGTheme
 
+/**
+ * The composable that specifies the [DrawingActivity] layout
+ *
+ * @param word      The word to be displayed
+ * @param viewModel The view model associated to the [DrawingActivity]
+ * @param onTouch   The function to be called whenever the user interacts with the drawing area
+ */
 @Composable
-fun NewDrawingActivityLayout(
+fun DrawingActivityLayout(
     word: String,
     viewModel: DrawingViewModel,
     onTouch: (MotionEvent) -> Boolean
@@ -68,7 +75,7 @@ fun NewDrawingActivityLayout(
 @Composable
 fun DefaultPreview() {
     DRAGTheme {
-        NewDrawingActivityLayout(
+        DrawingActivityLayout(
             word = "Pintainho",
             viewModel = DrawingViewModel(),
             onTouch = { false }

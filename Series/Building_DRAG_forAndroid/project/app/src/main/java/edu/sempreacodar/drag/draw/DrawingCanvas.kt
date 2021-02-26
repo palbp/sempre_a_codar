@@ -13,6 +13,9 @@ import edu.sempreacodar.drag.model.Drawing
 import edu.sempreacodar.drag.model.Line
 import edu.sempreacodar.drag.model.forEach
 
+/**
+ * Composable used to specify the drawing area
+ */
 @Composable
 fun NewDrawingCanvas(modifier: Modifier, drawing: Drawing?) {
 
