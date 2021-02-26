@@ -64,12 +64,12 @@ class NewDrawingActivity : AppCompatActivity() {
      * Helper method used to get the word to be drawn from the received intent
      */
     private fun getWordFromIntent() =
-        if (intent.hasExtra(DrawingActivity.WORD_EXTRA)) intent.getStringExtra(DrawingActivity.WORD_EXTRA) as String
+        if (intent.hasExtra(WORD_EXTRA)) intent.getStringExtra(WORD_EXTRA) as String
         else "Pintainho"
 
     /**
      * Helper method used to get the initial timer value from the received intent
      */
     private fun getTimerValueFromIntent() =
-        GameTimer.fromSeconds(intent.getIntExtra(DrawingActivity.TIMER_VALUE_EXTRA, 60))
+        GameTimer.fromSeconds(intent.getIntExtra(TIMER_VALUE_EXTRA, 60))
 }
