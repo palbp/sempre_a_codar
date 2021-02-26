@@ -28,6 +28,16 @@ class NewDrawingActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<DrawingViewModel>()
 
+    private fun handleTouchAt(event: MotionEvent): Boolean {
+        val point = Point(event.x, event.y)
+        return when (event.action) {
+            MotionEvent.ACTION_DOWN -> { viewModel.startLineAt(point); true }
+            MotionEvent.ACTION_MOVE -> { viewModel.addToLine(point); true }
+            MotionEvent.ACTION_UP -> { viewModel.endLineAt(point); true }
+            else -> false
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -36,16 +46,11 @@ class NewDrawingActivity : AppCompatActivity() {
                 Surface(color = MaterialTheme.colors.background) {
                     NewDrawingActivityLayout(
                         word = getWordFromIntent(),
-                        timer = viewModel.timerValue,
-                        drawing = viewModel.drawing,
+                        viewModel = viewModel,
                         onTouch = {
-                            val point = Point(it.x, it.y)
-                            when (it.action) {
-                                MotionEvent.ACTION_DOWN -> { viewModel.startLineAt(point); true }
-                                MotionEvent.ACTION_MOVE -> { viewModel.addToLine(point); true }
-                                MotionEvent.ACTION_UP -> { viewModel.endLineAt(point); true }
-                                else -> false
-                            }
+                            if (viewModel.state.value == DrawingViewModel.State.DRAWING)
+                                handleTouchAt(it)
+                            else false
                         }
                     )
                 }

@@ -1,11 +1,11 @@
 package edu.sempreacodar.drag.draw
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
@@ -16,6 +16,8 @@ import edu.sempreacodar.drag.model.forEach
 @Composable
 fun NewDrawingCanvas(modifier: Modifier, drawing: Drawing?) {
 
+    val color = MaterialTheme.colors.onBackground
+
     fun drawLine(scope: DrawScope, line: Line) {
         if (line.points.isEmpty())
             return
@@ -23,7 +25,7 @@ fun NewDrawingCanvas(modifier: Modifier, drawing: Drawing?) {
         var lastPoint = line.points.first()
         for(point in line.points) {
             scope.drawLine(
-                Color.Black,
+                color,
                 Offset(lastPoint.x, lastPoint.y),
                 Offset(point.x, point.y),
                 strokeWidth = 5.0F
@@ -37,7 +39,7 @@ fun NewDrawingCanvas(modifier: Modifier, drawing: Drawing?) {
         modifier = modifier,
         onDraw = {
             drawRoundRect(
-                color = Color.Black,
+                color = color,
                 style = Stroke(5F),
                 cornerRadius = CornerRadius(42F, 42F)
             )

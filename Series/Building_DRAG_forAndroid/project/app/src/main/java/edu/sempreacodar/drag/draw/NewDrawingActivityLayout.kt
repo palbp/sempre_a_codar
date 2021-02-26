@@ -2,6 +2,7 @@ package edu.sempreacodar.drag.draw
 
 import android.view.MotionEvent
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,28 +15,27 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import edu.sempreacodar.drag.model.Drawing
 import edu.sempreacodar.drag.model.GameTimer
-import edu.sempreacodar.drag.model.min
 import edu.sempreacodar.drag.model.sec
 import edu.sempreacodar.drag.ui.theme.DRAGTheme
 
 @Composable
 fun NewDrawingActivityLayout(
     word: String,
-    timer: LiveData<GameTimer>,
-    drawing: LiveData<Drawing>,
+    viewModel: DrawingViewModel,
     onTouch: (MotionEvent) -> Boolean
 ) {
+    fun isTimeRunningOut(state: DrawingViewModel.State, timer: GameTimer): Boolean =
+        state != DrawingViewModel.State.INITIALIZED && timer.toSeconds() < 10
 
     Column(
         Modifier.fillMaxWidth()
     ) {
 
-        val drawingState: Drawing? by drawing.observeAsState()
-        val timerState: GameTimer by timer.observeAsState(0.sec)
+        val drawingState: Drawing? by viewModel.drawing.observeAsState()
+        val timerState: GameTimer by viewModel.timerValue.observeAsState(viewModel.timerValue.value ?: 0.sec)
+        val state: DrawingViewModel.State by viewModel.state.observeAsState(viewModel.state.value ?: DrawingViewModel.State.INITIALIZED)
 
         Row(
             Modifier
@@ -46,7 +46,12 @@ fun NewDrawingActivityLayout(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(word, style = TextStyle(fontSize = 24.sp))
-            Text(timerState.toString(), style = TextStyle(fontSize = 34.sp))
+            Text(
+                color = if (isTimeRunningOut(state, timerState)) MaterialTheme.colors.error
+                else MaterialTheme.colors.onBackground,
+                text = timerState.toString(),
+                style = TextStyle(fontSize = 34.sp)
+            )
         }
         NewDrawingCanvas(
             modifier = Modifier
@@ -65,8 +70,7 @@ fun DefaultPreview() {
     DRAGTheme {
         NewDrawingActivityLayout(
             word = "Pintainho",
-            timer = MutableLiveData(1.min),
-            drawing = MutableLiveData(null),
+            viewModel = DrawingViewModel(),
             onTouch = { false }
         )
     }

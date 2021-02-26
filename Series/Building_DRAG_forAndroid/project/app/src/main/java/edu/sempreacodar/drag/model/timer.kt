@@ -39,6 +39,11 @@ inline val Int.min: GameTimer
     get() = from(this)
 
 /**
+ * Addition operator overload
+ */
+operator fun GameTimer.plus(other: GameTimer) = fromSeconds(toSeconds() + other.toSeconds())
+
+/**
  * Gets the current system time, expressed in seconds (truncating the milliseconds)
  * @return the current system time, in seconds
  */

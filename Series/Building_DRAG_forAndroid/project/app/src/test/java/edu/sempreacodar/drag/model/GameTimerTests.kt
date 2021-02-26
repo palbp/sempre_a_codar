@@ -19,7 +19,7 @@ class GameTimerTests {
 
     @Test
     fun toSeconds_returnsCorrectValue() {
-        val sut = GameTimer.from(minutes = 1, seconds = 30)
+        val sut = 1.min + 30.sec
         assertEquals(90, sut.toSeconds())
     }
 
@@ -27,7 +27,7 @@ class GameTimerTests {
     fun toString_returnsStringWithExpectedFormat() {
         val sut1 = GameTimer.from(minutes = 1, seconds = 30)
         assertEquals("1:30", sut1.toString())
-        val sut2 = GameTimer.from(minutes = 1, seconds = 3)
+        val sut2 = 1.min + 30.sec
         assertEquals("1:03", sut2.toString())
     }
 }
