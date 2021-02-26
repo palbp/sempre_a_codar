@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import edu.sempreacodar.drag.draw.model.*
+import edu.sempreacodar.drag.model.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -35,7 +35,7 @@ class DrawingViewModel : ViewModel() {
     /**
      * The current drawing
      */
-    val drawing: LiveData<Drawing> = MutableLiveData(Drawing())
+    val drawing: LiveData<Drawing> = MutableLiveData(Drawing.EMPTY)
     private val _drawing = drawing as MutableLiveData<Drawing>
 
     /**

@@ -1,57 +1,64 @@
 package edu.sempreacodar.drag.draw
 
-import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.util.AttributeSet
-import android.util.TypedValue
-import android.view.View
-import edu.sempreacodar.drag.draw.model.Drawing
-import edu.sempreacodar.drag.draw.model.Line
+import androidx.compose.foundation.Canvas
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.tooling.preview.Preview
+import edu.sempreacodar.drag.model.Drawing
+import edu.sempreacodar.drag.model.Line
+import edu.sempreacodar.drag.model.forEach
 
 /**
- * Custom view used to draw on the screen.
+ * Composable used to specify the drawing area
  */
-class DrawingCanvas(ctx: Context, attrs: AttributeSet?, defStyleAttr: Int)
-    : View(ctx, attrs, defStyleAttr) {
+@Composable
+fun NewDrawingCanvas(modifier: Modifier, drawing: Drawing?) {
 
-    constructor(ctx: Context, attrs: AttributeSet) : this(ctx, attrs, 0)
-    constructor(ctx: Context) : this(ctx, null, 0)
+    val color = MaterialTheme.colors.onBackground
 
-    private val brush by lazy {
-        Paint().apply {
-            val typedValue = TypedValue()
-            context.theme.resolveAttribute(android.R.attr.textColor, typedValue, true)
-            color = typedValue.data
-            strokeWidth = 5F
-            style = Paint.Style.STROKE
-        }
-    }
-
-    /**
-     * The associated model
-     */
-    var drawing: Drawing = Drawing()
-        set(value) { field = value; invalidate() }
-
-    override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
-        canvas.drawRoundRect(0F, 0F, width.toFloat(), height.toFloat(), 42F, 42F, brush)
-        drawDrawing(canvas)
-    }
-
-    private fun drawDrawing(canvas: Canvas) = drawing.lines.forEach {
-        drawLine(it, canvas)
-    }
-
-    private fun drawLine(line: Line, canvas: Canvas) {
+    fun drawLine(scope: DrawScope, line: Line) {
         if (line.points.isEmpty())
             return
 
         var lastPoint = line.points.first()
         for(point in line.points) {
-            canvas.drawLine(lastPoint.x, lastPoint.y, point.x, point.y, brush)
+            scope.drawLine(
+                color,
+                Offset(lastPoint.x, lastPoint.y),
+                Offset(point.x, point.y),
+                strokeWidth = 5.0F
+            )
             lastPoint = point
         }
+
     }
+
+    Canvas(
+        modifier = modifier,
+        onDraw = {
+            drawRoundRect(
+                color = color,
+                style = Stroke(5F),
+                cornerRadius = CornerRadius(42F, 42F)
+            )
+
+            drawing?.let {
+                drawing.forEach { drawLine(this, it) }
+            }
+        }
+    )
+}
+
+@Preview(showSystemUi = true)
+@Composable
+fun PreviewOfNewDrawingCanvas() {
+    NewDrawingCanvas(
+        Modifier,
+        drawing = null
+    )
 }
