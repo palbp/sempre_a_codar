@@ -10,11 +10,23 @@ import java.lang.System.currentTimeMillis
 class GameTimer private constructor(val minutes: Int = 0, val seconds: Int = 0) {
 
     companion object {
+        /**
+         * Builds an instance from the specified number of seconds. Negative values are coerced to zero.
+         * @param totalSeconds  the number of seconds of the created instance.
+         * @return the new timer instance.
+         */
         fun fromSeconds(totalSeconds: Int) = GameTimer(
             minutes = totalSeconds.coerceAtLeast(0) / SECONDS_IN_MINUTE,
             seconds = totalSeconds.coerceAtLeast(0) % SECONDS_IN_MINUTE
         )
 
+        /**
+         * Builds an instance from the specified number of minutes and seconds. Negative values
+         * are coerced to zero.
+         * @param minutes  the number of minutes
+         * @param seconds  the number of seconds
+         * @return the new timer instance.
+         */
         fun from(minutes: Int, seconds: Int = 0) = GameTimer(
             minutes = minutes.coerceAtLeast(0)  +
                     seconds.coerceAtLeast(0) / SECONDS_IN_MINUTE,
