@@ -20,9 +20,14 @@ class RoundReviewActivity : AppCompatActivity() {
         setContent {
             DRAGTheme {
                 Surface(color = MaterialTheme.colors.background) {
-                    // TODO
+                    RoundReviewActivityLayout(viewModel.round, viewModel.currentMoveIndex) {
+                        if (it == SwipeDirection.LEFT) viewModel.navigateToPreviousMove()
+                        else viewModel.navigateToNextMove()
+                    }
                 }
             }
         }
+
+        viewModel.fetchRoundData()
     }
 }
