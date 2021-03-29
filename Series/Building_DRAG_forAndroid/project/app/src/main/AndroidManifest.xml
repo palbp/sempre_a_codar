@@ -11,13 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DRAG">
         <activity
-            android:name=".draw.DrawingActivity"
+            android:name=".review.RoundReviewActivity"
             android:exported="true"
-            android:label="@string/app_name">
+            android:theme="@style/Theme.DRAG.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".draw.DrawingActivity"
+            android:exported="true"
+            android:label="@string/app_name">
         </activity>
     </application>
 
