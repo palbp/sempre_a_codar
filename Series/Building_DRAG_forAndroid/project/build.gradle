@@ -1,24 +1,24 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        kotlin_version = '1.4.30'
+        kotlin_version = '1.4.31'
         core_ktx_version = '1.3.2'
 
-        activityx_version = '1.3.0-alpha03'
-        lifecycle_version = '2.3.0'
+        activityx_version = '1.3.0-alpha05'
+        lifecycle_version = '2.3.1'
 
         coroutines_version = '1.4.1'
 
-        compose_version = '1.0.0-beta01'
-        viewmodel_compose_version = '1.0.0-alpha02'
+        compose_version = '1.0.0-beta03'
+        viewmodel_compose_version = '1.0.0-alpha03'
     }
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.0-alpha09'
+        classpath 'com.android.tools.build:gradle:7.0.0-alpha12'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -29,7 +29,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 

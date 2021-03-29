@@ -30,9 +30,11 @@ class RoundReviewViewModel : ViewModel() {
 
     /**
      * Asynchronously fetches the round data and publishes it to [round]
+     *
+     * Currently the method has a mocked implementation.
+     * TODO: Implement it for real
      */
     fun fetchRoundData() {
-        // TODO: Implement this for real
         viewModelScope.launch {
             delay(5000)
             _round.value = Round(
