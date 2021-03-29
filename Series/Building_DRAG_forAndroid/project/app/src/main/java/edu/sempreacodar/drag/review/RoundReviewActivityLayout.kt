@@ -50,21 +50,12 @@ fun RoundReviewActivityLayout(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        if (round.value == null)
+        val roundInfo = round.value
+        if (roundInfo == null)
             CircularProgressIndicator(modifier = Modifier.size(100.dp))
         else
-            MoveLayout(round.value, currentMoveIndexLiveData)
+            MoveLayout(roundInfo, currentMoveIndexLiveData)
     }
-}
-
-@Composable
-fun MoveLayout(
-    round: Round?,
-    currentMoveIndexLiveData: LiveData<Int?>,
-) {
-    val currentMove = currentMoveIndexLiveData.observeAsState()
-    Text(currentMove.value.toString(), style = TextStyle(fontSize = 52.sp))
-
 }
 
 @Preview(showBackground = true, showSystemUi = true)
