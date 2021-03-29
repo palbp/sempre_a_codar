@@ -6,6 +6,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import edu.sempreacodar.drag.review.layout.RoundReviewActivityLayout
+import edu.sempreacodar.drag.review.layout.SwipeDirection
 import edu.sempreacodar.drag.ui.theme.DRAGTheme
 
 /**

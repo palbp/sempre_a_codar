@@ -1,4 +1,4 @@
-package edu.sempreacodar.drag.review
+package edu.sempreacodar.drag.review.layout
 
 import android.view.MotionEvent
 import androidx.compose.foundation.layout.Arrangement
@@ -6,16 +6,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInteropFilter
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import edu.sempreacodar.drag.model.Round
@@ -24,7 +21,7 @@ import edu.sempreacodar.drag.ui.theme.DRAGTheme
 enum class SwipeDirection { LEFT, RIGHT }
 
 /**
- * The composable that specifies the [RoundReviewActivity] layout
+ * The composable that specifies the round review screen layout.
  */
 @Composable
 fun RoundReviewActivityLayout(
@@ -62,6 +59,6 @@ fun RoundReviewActivityLayout(
 @Composable
 fun DefaultPreview() {
     DRAGTheme {
-        RoundReviewActivityLayout(MutableLiveData(), MutableLiveData(), { })
+        RoundReviewActivityLayout(MutableLiveData(), MutableLiveData()) { }
     }
 }
